@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📦 I‑AM‑SYSTEMS – Complete Decentralized Universe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #05080d;
+            --color-surface: #0c141c;
+            --color-primary: #00ffc8;
+            --color-secondary: #7afcff;
+            --color-text: #e6f5ff;
+            --color-muted: #6e8898;
+            --color-border: rgba(0, 255, 200, .3);
+            --glow: 0 0 15px rgba(0, 255, 200, .45);
+            --glow-strong: 0 0 25px rgba(0, 255, 200, .75);
+        }
+
+        body {
+            font-family: 'Orbitron', 'Segoe UI', Tahoma, sans-serif;
+            background: radial-gradient(circle at center, #0a1016 0%, #020407 100%);
+            color: var(--color-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::before {
+            background: repeating-linear-gradient(to bottom,
+                    rgba(0, 255, 200, .06) 0,
+                    rgba(0, 255, 200, .06) 1px,
+                    transparent 2px);
+            opacity: .25;
+        }
+
+        body::after {
+            background:
+                linear-gradient(90deg, rgba(0, 255, 200, .07) 1px, transparent 1px),
+                linear-gradient(rgba(0, 255, 200, .07) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: .1;
+        }
+
+        header {
+            background: var(--color-surface);
+            padding: 20px;
+            border-bottom: 2px solid var(--color-primary);
+            box-shadow: var(--glow);
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            color: var(--color-primary);
+            text-align: center;
+            font-size: 2.8rem;
+            text-shadow: var(--glow-strong);
+            letter-spacing: 3px;
+            margin-bottom: .5rem;
+        }
+
+        .subtitle,
+        .copyright {
+            text-align: center;
+            color: var(--color-secondary);
+            opacity: .85;
+        }
+
+        .copyright {
+            font-size: .9rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        #tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: .75rem;
+            margin-top: 1rem;
+        }
+
+        .tab {
+            padding: .6rem 1.2rem;
+            background: rgba(0, 0, 0, .4);
+            color: var(--color-secondary);
+            border: 1px solid var(--color-primary);
+            border-radius: .4rem;
+            cursor: pointer;
+            transition: all .25s ease-in-out;
+            font-weight: 600;
+            letter-spacing: 1px;
+            backdrop-filter: blur(6px);
+        }
+
+        .tab:hover {
+            background: var(--color-primary);
+            color: var(--color-bg);
+            transform: translateY(-3px);
+            box-shadow: var(--glow-strong);
+        }
+
+        .tab.active {
+            background: var(--color-primary);
+            color: var(--color-bg);
+            box-shadow: var(--glow-strong);
+        }
+
+        main {
+            padding: 1.5rem;
+            max-width: 1480px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        #content-area {
+            background: var(--color-surface);
+            padding: 2rem;
+            border-radius: .6rem;
+            border: 1px solid var(--color-border);
+            box-shadow: inset 0 0 10px rgba(0, 255, 200, .15), var(--glow);
+            min-height: 600px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--color-secondary);
+            font-size: 1.3rem;
+        }
+
+        .spinner {
+            border: 4px solid var(--color-border);
+            border-top: 4px solid var(--color-primary);
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            animation: spin .9s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .status-bar {
+            background: rgba(0, 0, 0, .4);
+            padding: .75rem 1.25rem;
+            margin-top: 1rem;
+            border-radius: .4rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: .9rem;
+            border: 1px solid var(--color-border);
+            backdrop-filter: blur(4px);
+        }
+
+        .status-item {
+            font-size: .85rem;
+            color: var(--color-muted);
+        }
+
+        .status-item.connected {
+            color: #00ff95;
+        }
+
+        .status-item.disconnected {
+            color: #ff4d4d;
+        }
+
+        button {
+            padding: .6rem 1.2rem;
+            background: var(--color-primary);
+            color: var(--color-bg);
+            border: none;
+            border-radius: .4rem;
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all .25s;
+            margin-right: .5rem;
+            margin-bottom: .5rem;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: var(--glow-strong);
+        }
+
+        button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        .card {
+            background: var(--color-bg);
+            padding: 1.5rem;
+            border-radius: .5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .card h3 {
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: .75rem;
+            background: var(--color-surface);
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+            border-radius: .4rem;
+            margin-bottom: .75rem;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.875rem;
+        }
+
+        .feature-card {
+            background: var(--color-bg);
+            padding: 1.5rem;
+            border-radius: .5rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .feature-card h3 {
+            color: var(--color-primary);
+            margin-bottom: .75rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: var(--color-surface);
+            border: 2px solid var(--color-primary);
+            border-radius: .375rem;
+            padding: 1rem;
+            max-width: 400px;
+            z-index: 9999;
+            animation: slideIn .3s ease-out;
+            box-shadow: var(--glow);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(350px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.success {
+            border-color: #00ff95;
+        }
+
+        .notification.error {
+            border-color: #ff4d4d;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .log {
+            background: #000;
+            color: #0f0;
+            padding: 1rem;
+            border-radius: .4rem;
+            font-family: monospace;
+            font-size: .9rem;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+
+        .proof {
+            background: var(--color-surface);
+            padding: 1rem;
+            border-radius: .4rem;
+            font-family: monospace;
+            font-size: .85rem;
+            word-break: break-all;
+        }
+
+        /* DEX Specific Styles */
+        .dex-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .token-input-group {
+            background: var(--color-surface);
+            padding: 1rem;
+            border-radius: .5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .token-input-row {
+            display: flex;
+            gap: .75rem;
+            align-items: center;
+        }
+
+        .swap-arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--color-primary);
+            cursor: pointer;
+            padding: .5rem;
+            user-select: none;
+        }
+
+        .swap-arrow:hover {
+            transform: rotate(180deg);
+            transition: transform .3s;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-box {
+            background: var(--color-surface);
+            padding: 1rem;
+            border-radius: .5rem;
+            text-align: center;
+            border: 1px solid var(--color-border);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: .85rem;
+            color: var(--color-muted);
+            margin-top: .25rem;
+        }
+
+        .pool-item, .order-item, .history-item, .block-item, .nft-card {
+            background: var(--color-surface);
+            padding: 1rem;
+            margin-bottom: .75rem;
+            border-radius: .5rem;
+            border-left: 3px solid var(--color-primary);
+        }
+
+        .info-text {
+            color: var(--color-muted);
+            font-size: .9rem;
+            margin-top: .5rem;
+        }
+
+        .price-impact {
+            display: flex;
+            justify-content: space-between;
+            padding: .75rem;
+            background: var(--color-surface);
+            border-radius: .4rem;
+            margin-top: .75rem;
+        }
+
+        .price-impact.high {
+            border: 1px solid #ff4d4d;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            #tabs {
+                flex-direction: column;
+            }
+
+            .tab {
+                width: 100%;
+                text-align: center;
+            }
+
+            #content-area {
+                padding: 1rem;
+            }
+
+            .grid, .dex-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>📦 I‑AM‑SYSTEMS</h1>
+        <div class="subtitle">Complete Decentralized Universe with DEX</div>
+        <div class="copyright">
+            © 2025 James Chapman | SPL v1.0 (Non‑Commercial) | Enhanced with Token Swap
+        </div>
+
+        <div id="tabs">
+            <div class="tab active" data-tab="home">🏠 Home</div>
+            <div class="tab" data-tab="dex">🔄 DEX</div>
+            <div class="tab" data-tab="identity">🔑 Identity</div>
+            <div class="tab" data-tab="wallet">💼 Wallet</div>
+            <div class="tab" data-tab="ai">🤖 AI Partner</div>
+            <div class="tab" data-tab="blockchain">⛓️ Blockchain</div>
+            <div class="tab" data-tab="nft">🎨 NFT</div>
+            <div class="tab" data-tab="storage">📦 Storage</div>
+            <div class="tab" data-tab="agents">🤖 Agents</div>
+            <div class="tab" data-tab="governance">🗳️ Governance</div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item" id="ipfs-status">IPFS: <span class="disconnected">Checking…</span></div>
+            <div class="status-item" id="ollama-status">Ollama: <span class="disconnected">Checking…</span></div>
+            <div class="status-item" id="wallet-status">Wallet: <span class="disconnected">Disconnected</span></div>
+            <div class="status-item" id="did-status">DID: <span class="disconnected">Not Created</span></div>
+            <div class="status-item" id="token-status">IAM Tokens: <span>0</span></div>
+            <div class="status-item">P2P Peers: <span id="p2p-peers">0</span></div>
+        </div>
+    </header>
+
+    <main>
+        <div id="content-area">
+            <div class="loading">
+                <div class="spinner"></div>
+                <div>Initializing I‑AM‑SYSTEMS…</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ============================================
+        // CORE ENGINE - AISubstrate (Original)
+        // ============================================
+        class AISubstrate {
+            constructor() {
+                this.chain = [];
+                this.nfts = [];
+                this.agents = [];
+                this.storage = new Map();
+                this.walletAddress = this.generateAddress();
+                this.lastExecution = null;
+                this.createGenesisBlock();
+            }
+
+            generateAddress() {
+                return '0x' + Array.from({length: 40}, () =>
+                Math.floor(Math.random() * 16).toString(16)).join('');
+            }
+
+            async sha256(data) {
+                const str = typeof data === 'string' ? data : JSON.stringify(data);
+                const buffer = await crypto.subtle.digest('SHA-256',
+                    new TextEncoder().encode(str));
+                return Array.from(new Uint8Array(buffer))
+                    .map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+
+            async keccak256Sim(data) {
+                const str = typeof data === 'string' ? data : JSON.stringify(data);
+                let hash = 0;
+                for (let i = 0; i < str.length; i++) {
+                    hash = ((hash << 5) - hash + str.charCodeAt(i)) | 0;
+                }
+                return Math.abs(hash).toString(16).padStart(64, '0');
+            }
+
+            async createGenesisBlock() {
+                const genesis = {
+                    index: 0,
+                    timestamp: Date.now(),
+                    data: {type: 'GENESIS', message: 'AI Substrate Genesis'},
+                    previousHash: '0'.repeat(64),
+                    proof: null,
+                    signature: null
+                };
+                genesis.hash = await this.sha256(genesis);
+                genesis.signature = await this.sign(genesis.hash);
+                this.chain.push(genesis);
+            }
+
+            async sign(data) {
+                const hash = await this.sha256(data + this.walletAddress);
+                return hash.substring(0, 32);
+            }
+
+            async addBlock(action, data) {
+                const previousBlock = this.chain[this.chain.length - 1];
+                const block = {
+                    index: this.chain.length,
+                    timestamp: Date.now(),
+                    data: {action, ...data},
+                    previousHash: previousBlock.hash,
+                    nonce: 0
+                };
+                block.hash = await this.sha256(block);
+                const proof = {
+                    inputHash: await this.sha256(block.data),
+                    outputHash: block.hash,
+                    merkleRoot: await this.computeMerkleRoot([previousBlock.hash, block.hash])
+                };
+                block.proof = proof;
+                block.signature = await this.sign(block.hash);
+                this.chain.push(block);
+                return block;
+            }
+
+            async computeMerkleRoot(hashes) {
+                if (hashes.length === 0) return '0'.repeat(64);
+                if (hashes.length === 1) return hashes[0];
+                const newLevel = [];
+                for (let i = 0; i < hashes.length; i += 2) {
+                    const left = hashes[i];
+                    const right = hashes[i + 1] || left;
+                    newLevel.push(await this.sha256(left + right));
+                }
+                return this.computeMerkleRoot(newLevel);
+            }
+
+            async verifyChain() {
+                let valid = true;
+                for (let i = 1; i < this.chain.length; i++) {
+                    const block = this.chain[i];
+                    const prev = this.chain[i - 1];
+                    if (block.previousHash !== prev.hash) {
+                        valid = false;
+                        break;
+                    }
+                }
+                return valid;
+            }
+
+            // NFT Methods
+            async createNFT(cid, usage, expiry) {
+                const nft = {
+                    id: await this.keccak256Sim(cid + Date.now()),
+                    cid,
+                    owner: this.walletAddress,
+                    permissions: {
+                        read: [this.walletAddress],
+                        write: [this.walletAddress]
+                    },
+                    usage,
+                    expires: expiry || '2026-12-31',
+                    created: new Date().toISOString()
+                };
+                nft.tokenHash = await this.sha256(nft);
+                this.nfts.push(nft);
+                await this.addBlock('NFT_MINT', {nftId: nft.id, owner: nft.owner, cid: nft.cid});
+                return nft;
+            }
+
+            // IPFS Methods
+            async storeToIPFS(data, key) {
+                let content = data;
+                if (key) content = btoa(data + '::' + key);
+                const cid = 'ipfs://Qm' + (await this.keccak256Sim(content)).substring(0, 44);
+                this.storage.set(cid, {content, encrypted: !!key, timestamp: Date.now()});
+                await this.addBlock('IPFS_STORE', {cid});
+                return cid;
+            }
+
+            async retrieveFromIPFS(cid) {
+                return this.storage.get(cid);
+            }
+
+            // Agent Methods
+            createAgent(name, model) {
+                const agent = {
+                    id: 'agent-' + Date.now(),
+                    name: name || 'Agent-' + this.agents.length,
+                    model,
+                    wallet: this.generateAddress(),
+                    created: Date.now(),
+                    executions: 0
+                };
+                this.agents.push(agent);
+                return agent;
+            }
+        }
+
+        // ============================================
+        // DEX ENGINE
+        // ============================================
+        class DEXEngine {
+            constructor() {
+                this.pools = new Map();
+                this.balances = new Map();
+                this.orders = [];
+                this.history = [];
+                this.stats = {
+                    volume24h: 0,
+                    totalLiquidity: 0,
+                    totalTrades: 0,
+                    totalFees: 0
+                };
+                this.currentAddress = null;
+                this.walletType = null;
+                this.FEE_PERCENT = 0.003;
+                this.initializeTestData();
+            }
+
+            initializeTestData() {
+                this.pools.set('IAM-ETH', {
+                    tokenA: 'IAM',
+                    tokenB: 'ETH',
+                    reserveA: 10000,
+                    reserveB: 10,
+                    lpSupply: 100,
+                    lpHolders: new Map()
+                });
+
+                this.pools.set('IAM-USDC', {
+                    tokenA: 'IAM',
+                    tokenB: 'USDC',
+                    reserveA: 10000,
+                    reserveB: 1000,
+                    lpSupply: 100,
+                    lpHolders: new Map()
+                });
+            }
+
+            setWallet(address, type) {
+                this.currentAddress = address;
+                this.walletType = type;
+                
+                if (type === 'browser' && !this.balances.has(address)) {
+                    this.balances.set(address, {
+                        'IAM': 1000,
+                        'ETH': 5,
+                        'USDC': 10000,
+                        'CUSTOM': 0
+                    });
+                }
+            }
+
+            getBalance(address, token) {
+                if (!this.balances.has(address)) return 0;
+                return this.balances.get(address)[token] || 0;
+            }
+
+            updateBalance(address, token, amount) {
+                if (!this.balances.has(address)) {
+                    this.balances.set(address, {});
+                }
+                const balances = this.balances.get(address);
+                balances[token] = (balances[token] || 0) + amount;
+            }
+
+            getPoolKey(tokenA, tokenB) {
+                return [tokenA, tokenB].sort().join('-');
+            }
+
+            getPool(tokenA, tokenB) {
+                const key = this.getPoolKey(tokenA, tokenB);
+                return this.pools.get(key);
+            }
+
+            calculateSwapOutput(amountIn, reserveIn, reserveOut) {
+                if (amountIn <= 0 || reserveIn <= 0 || reserveOut <= 0) return 0;
+                const amountInWithFee = amountIn * (1 - this.FEE_PERCENT);
+                const numerator = amountInWithFee * reserveOut;
+                const denominator = reserveIn + amountInWithFee;
+                return numerator / denominator;
+            }
+
+            calculatePriceImpact(amountIn, reserveIn, reserveOut) {
+                const spotPrice = reserveOut / reserveIn;
+                const amountOut = this.calculateSwapOutput(amountIn, reserveIn, reserveOut);
+                const effectivePrice = amountOut / amountIn;
+                const priceImpact = ((spotPrice - effectivePrice) / spotPrice) * 100;
+                return Math.abs(priceImpact);
+            }
+
+            executeAMMSwap(fromToken, toToken, amountIn) {
+                const pool = this.getPool(fromToken, toToken);
+                if (!pool) throw new Error(`No liquidity pool for ${fromToken}-${toToken}`);
+
+                const isNormalOrder = pool.tokenA === fromToken;
+                const reserveIn = isNormalOrder ? pool.reserveA : pool.reserveB;
+                const reserveOut = isNormalOrder ? pool.reserveB : pool.reserveA;
+
+                const amountOut = this.calculateSwapOutput(amountIn, reserveIn, reserveOut);
+                const fee = amountIn * this.FEE_PERCENT;
+
+                if (isNormalOrder) {
+                    pool.reserveA += amountIn;
+                    pool.reserveB -= amountOut;
+                } else {
+                    pool.reserveB += amountIn;
+                    pool.reserveA -= amountOut;
+                }
+
+                this.updateBalance(this.currentAddress, fromToken, -amountIn);
+                this.updateBalance(this.currentAddress, toToken, amountOut);
+
+                this.stats.totalTrades++;
+                this.stats.totalFees += fee;
+                this.stats.volume24h += amountIn;
+
+                this.history.unshift({
+                    type: 'AMM Swap',
+                    from: fromToken,
+                    to: toToken,
+                    amountIn: amountIn.toFixed(4),
+                    amountOut: amountOut.toFixed(4),
+                    fee: fee.toFixed(4),
+                    timestamp: new Date().toLocaleString()
+                });
+
+                return { amountOut, fee };
+            }
+
+            addLiquidity(tokenA, tokenB, amountA, amountB) {
+                const poolKey = this.getPoolKey(tokenA, tokenB);
+                let pool = this.pools.get(poolKey);
+
+                if (!pool) {
+                    pool = {
+                        tokenA,
+                        tokenB,
+                        reserveA: amountA,
+                        reserveB: amountB,
+                        lpSupply: Math.sqrt(amountA * amountB),
+                        lpHolders: new Map()
+                    };
+                    this.pools.set(poolKey, pool);
+                } else {
+                    const liquidityA = (amountA * pool.lpSupply) / pool.reserveA;
+                    const liquidityB = (amountB * pool.lpSupply) / pool.reserveB;
+                    const liquidity = Math.min(liquidityA, liquidityB);
+
+                    pool.reserveA += amountA;
+                    pool.reserveB += amountB;
+                    pool.lpSupply += liquidity;
+
+                    const currentLP = pool.lpHolders.get(this.currentAddress) || 0;
+                    pool.lpHolders.set(this.currentAddress, currentLP + liquidity);
+                }
+
+                this.updateBalance(this.currentAddress, tokenA, -amountA);
+                this.updateBalance(this.currentAddress, tokenB, -amountB);
+
+                this.history.unshift({
+                    type: 'Add Liquidity',
+                    from: `${tokenA}/${tokenB}`,
+                    to: 'Pool',
+                    amountIn: `${amountA.toFixed(4)} ${tokenA} + ${amountB.toFixed(4)} ${tokenB}`,
+                    amountOut: 'LP Tokens',
+                    timestamp: new Date().toLocaleString()
+                });
+
+                return pool;
+            }
+
+            getTokenPrice(token) {
+                if (token === 'IAM') {
+                    const pool = this.getPool('IAM', 'USDC');
+                    return pool ? (pool.reserveB / pool.reserveA).toFixed(4) : '0.10';
+                }
+                if (token === 'ETH') {
+                    const pool = this.getPool('ETH', 'USDC');
+                    return pool ? (pool.reserveB / pool.reserveA).toFixed(2) : '3000';
+                }
+                if (token === 'USDC') return '1.00';
+                return '0.00';
+            }
+        }
+
+        // ============================================
+        // GLOBAL INSTANCES
+        // ============================================
+        const aiSubstrate = new AISubstrate();
+        const dex = new DEXEngine();
+        let currentTab = 'home';
+
+        // ============================================
+        // TAB NAVIGATION
+        // ============================================
+        document.getElementById('tabs').addEventListener('click', (e) => {
+            if (e.target.classList.contains('tab')) {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                e.target.classList.add('active');
+                currentTab = e.target.dataset.tab;
+                renderTab(currentTab);
+            }
+        });
+
+        function renderTab(tab) {
+            const content = document.getElementById('content-area');
+            content.innerHTML = '';
+
+            switch(tab) {
+                case 'home':
+                    renderHome(content);
+                    break;
+                case 'dex':
+                    renderDEX(content);
+                    break;
+                case 'identity':
+                    renderIdentity(content);
+                    break;
+                case 'wallet':
+                    renderWallet(content);
+                    break;
+                case 'ai':
+                    renderAI(content);
+                    break;
+                case 'blockchain':
+                    renderBlockchain(content);
+                    break;
+                case 'nft':
+                    renderNFT(content);
+                    break;
+                case 'storage':
+                    renderStorage(content);
+                    break;
+                case 'agents':
+                    renderAgents(content);
+                    break;
+                case 'governance':
+                    renderGovernance(content);
+                    break;
+                default:
+                    content.innerHTML = '<h2>Coming Soon</h2>';
+            }
+        }
+
+        // ============================================
+        // RENDER FUNCTIONS
+        // ============================================
+
+        function renderHome(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--color-primary); margin-bottom:24px;">Welcome to I‑AM‑SYSTEMS</h2>
+                <p style="color: var(--color-secondary); font-size:1.2em; text-align:center; margin-bottom:2rem;">
+                    Complete Decentralized Universe with AI, Blockchain, NFTs, Storage, and DEX
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🔄 Decentralized Exchange</h3>
+                        <p>Trade tokens with AMM or P2P, provide liquidity, earn fees</p>
+                        <button onclick="switchToTab('dex')">Go to DEX</button>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🤖 AI Partner</h3>
+                        <p>Deterministic AI execution with provable results</p>
+                        <button onclick="switchToTab('ai')">Launch AI</button>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⛓️ Blockchain</h3>
+                        <p>${aiSubstrate.chain.length} blocks mined</p>
+                        <button onclick="switchToTab('blockchain')">View Chain</button>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎨 NFT Licenses</h3>
+                        <p>Create and manage NFT licenses for AI training & data</p>
+                        <button onclick="switchToTab('nft')">Create NFT</button>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📦 IPFS Storage</h3>
+                        <p>Decentralized storage with encryption</p>
+                        <button onclick="switchToTab('storage')">Store Data</button>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🤖 AI Agents</h3>
+                        <p>Create autonomous AI agents</p>
+                        <button onclick="switchToTab('agents')">Manage Agents</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 2rem;">
+                    <h3>Quick Actions</h3>
+                    <button onclick="initSystem()">Initialize All Systems</button>
+                    <button onclick="runFullDemo()">Run Full Demo</button>
+                </div>
+            `;
+        }
+
+        function renderDEX(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--color-primary);">🔄 Decentralized Exchange</h2>
+                <div class="dex-grid">
+                    <div class="card">
+                        <h3>💱 Token Swap</h3>
+                        <div class="token-input-group">
+                            <label>From</label>
+                            <div class="token-input-row">
+                                <input type="number" id="amountFrom" placeholder="0.0" min="0" step="0.01">
+                                <select id="tokenFrom">
+                                    <option value="IAM">IAM</option>
+                                    <option value="ETH">ETH</option>
+                                    <option value="USDC">USDC</option>
+                                </select>
+                            </div>
+                            <div class="info-text">Balance: <span id="balanceFrom">0</span></div>
+                        </div>
+
+                        <div class="swap-arrow" onclick="swapTokenDirection()">⇅</div>
+
+                        <div class="token-input-group">
+                            <label>To</label>
+                            <div class="token-input-row">
+                                <input type="number" id="amountTo" placeholder="0.0" readonly>
+                                <select id="tokenTo">
+                                    <option value="ETH">ETH</option>
+                                    <option value="IAM">IAM</option>
+                                    <option value="USDC">USDC</option>
+                                </select>
+                            </div>
+                            <div class="info-text">Balance: <span id="balanceTo">0</span></div>
+                        </div>
+
+                        <div class="price-impact" id="priceImpact">
+                            <span>Price Impact:</span>
+                            <span id="impactValue">--%</span>
+                        </div>
+
+                        <button id="swapButton" onclick="executeSwap()" style="width: 100%; margin-top: 1rem;">
+                            Execute Swap
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <h3>💧 Liquidity Pools</h3>
+                        <div class="token-input-group">
+                            <label>Token A</label>
+                            <div class="token-input-row">
+                                <input type="number" id="liquidityAmountA" placeholder="0.0">
+                                <select id="liquidityTokenA">
+                                    <option value="IAM">IAM</option>
+                                    <option value="ETH">ETH</option>
+                                    <option value="USDC">USDC</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="token-input-group">
+                            <label>Token B</label>
+                            <div class="token-input-row">
+                                <input type="number" id="liquidityAmountB" placeholder="0.0">
+                                <select id="liquidityTokenB">
+                                    <option value="ETH">ETH</option>
+                                    <option value="IAM">IAM</option>
+                                    <option value="USDC">USDC</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button onclick="addLiquidity()" style="width: 100%;">Add Liquidity</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>📊 DEX Statistics</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-value" id="totalVolume">$0</div>
+                                <div class="stat-label">24h Volume</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value" id="totalTrades">${dex.stats.totalTrades}</div>
+                                <div class="stat-label">Total Trades</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>📜 Transaction History</h3>
+                        <div id="dexHistory" style="max-height: 300px; overflow-y: auto;"></div>
+                    </div>
+                </div>
+            `;
+            
+            // Setup event listeners
+            document.getElementById('amountFrom').addEventListener('input', updateSwapCalculation);
+            updateDEXBalances();
+            updateDEXHistory();
+        }
+
+        function renderIdentity(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--color-primary);">🔑 Decentralized Identity</h2>
+                <div class="card">
+                    <h3>Your DID</h3>
+                    <p>Wallet Address: <strong>${aiSubstrate.walletAddress}</strong></p>
+                    <button onclick="copyToClipboard('${aiSubstrate.walletAddress}')">Copy Address</button>
+                </div>
+            `;
+        }
+
+        function renderWallet(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--color-primary);">💼 Wallet</h2>
+                <div class="card">
+                    <h3>Connect Wallet</h3>
+                    <button onclick="connectMetaMask()" style="width: 100%;">Connect MetaMask</button>
+                    <button onclick="useInBrowserWallet()" style="width: 100%; margin-top: .75rem;">Use In-Browser Wallet</button>
+                </div>
+                
+                ${dex.currentAddress ? `
+                    <div class="card">
+                        <h3>Balances</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-value">${dex.getBalance(dex.currentAddress, 'IAM').toFixed(2)}</div>
+                                <div class="stat-label">IAM</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">${dex.getBalance(dex.currentAddress, 'ETH').toFixed(4)}</div>
+                                <div class="stat-label">ETH</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">${dex.getBalance(dex.currentAddress, 'USDC').toFixed(2)}</div>
+                                <div class="stat-label">USDC</div>
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        function renderAI(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--color-primary);">🤖 AI Partner</h2>
+                <div class="card">
+                    <h3>Deterministic AI Execution</h3>
+                    <label>Prompt:</label>
+                    <textarea id="aiPrompt" rows="3" placeholder="Enter AI prompt...">Analyze chain state</textarea>
+                    <label>Seed (for determinism):</label>
+                    <input type="number" id="aiSeed" value="1337">
+                    <button onclick="executeAI()">Execute AI</button>
+                    <div id="aiLog" class="log"></div>
+                </div>
+            `;
+        }
+
+        function renderBlockchain(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--color-primary);">⛓️ Blockchain</h2>
+                <div class="card">
+                    <h3>Chain Stats</h3>
+                    <p><strong>Blocks:</strong> ${aiSubstrate.chain.length}</p>
+                    <p><strong>Latest Block:</strong> ${aiSubstrate.chain[aiSubstrate.chain.length - 1].hash.substring(0,16)}...</p>
+                    <button onclick="verifyChain()">Verify Chain</button>
+                </div>
+                
+                <div class="card">
+                    <h3>Recent Blocks</h3>
+                    <div id="blockList"></div>
+                </div>
+            `;
+            displayBlockchain();
+        }
+
+        function renderNFT(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--color-primary);">🎨 NFT Licenses</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Create License NFT</h3>
+                        <label>Data CID:</label>
+                        <input type="text" id="nftCid" placeholder="ipfs://...">
+                        <label>Usage Type:</label>
+                        <select id="nftUsage">
+                            <option>ai-training</option>
+                            <option>ai-inference</option>
+                            <option>data-access</option>
+                        </select>
+                        <label>Expiration Date:</label>
+                        <input type="date" id="nftExpiry">
+                        <button onclick="createNFT()">Create NFT</button>
+                        <div id="nftLog" class="log"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3>My NFT Licenses</h3>
+                        <div id="nftList"></div>
+                    </div>
+                </div>
+            `;
+            displayNFTs();
+        }
+
+        function renderStorage(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--color-primary);">📦 IPFS Storage</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Store Data</h3>
+                        <label>Data to store:</label>
+                        <textarea id="ipfsData" rows="4" placeholder="Enter data to store..."></textarea>
+                        <label>Encryption Key (optional):</label>
+                        <input type="text" id="encryptKey" placeholder="Leave empty for unencrypted">
+                        <button onclick="storeToIPFS()">Store to IPFS</button>
+                        <button onclick="retrieveFromIPFS()">Retrieve</button>
+                        <div id="ipfsLog" class="log"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Stored Items</h3>
+                        <div id="ipfsList"></div>
+                    </div>
+                </div>
+            `;
+            displayStorage();
+        }
+
+        function renderAgents(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--color-primary);">🤖 AI Agents</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Create AI Agent</h3>
+                        <label>Agent Name:</label>
+                        <input type="text" id="agentName" placeholder="Agent-001">
+                        <label>Model:</label>
+                        <select id="agentModel">
+                            <option>WebLLM-7B</option>
+                            <option>Local-Mistral</option>
+                            <option>Deterministic-GPT</option>
+                        </select>
+                        <button onclick="createAgent()">Create Agent</button>
+                        <div id="agentLog" class="log"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Active Agents</h3>
+                        <div id="agentList"></div>
+                    </div>
+                </div>
+            `;
+            displayAgents();
+        }
+
+        function renderGovernance(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--color-primary);">🗳️ Governance</h2>
+                <div class="card">
+                    <h3>System Governance</h3>
+                    <p>Vote on protocol parameters using IAM tokens</p>
+                    <p class="info-text">Coming soon: Propose and vote on system changes</p>
+                </div>
+            `;
+        }
+
+        // ============================================
+        // ACTION FUNCTIONS
+        // ============================================
+
+        function switchToTab(tabName) {
+            const tab = Array.from(document.querySelectorAll('.tab')).find(t => t.dataset.tab === tabName);
+            if (tab) tab.click();
+        }
+
+        async function executeAI() {
+            const prompt = document.getElementById('aiPrompt').value;
+            const seed = parseInt(document.getElementById('aiSeed').value);
+            const log = document.getElementById('aiLog');
+            
+            log.innerHTML += `\n[${new Date().toLocaleTimeString()}] Executing AI with seed ${seed}...\n`;
+            log.innerHTML += `Prompt: ${prompt}\n`;
+            log.innerHTML += `✅ AI Response: Analyzed chain with ${aiSubstrate.chain.length} blocks.\n`;
+            
+            await aiSubstrate.addBlock('AI_EXECUTION', {prompt, seed});
+        }
+
+        async function verifyChain() {
+            const valid = await aiSubstrate.verifyChain();
+            showNotification(valid ? 'Chain integrity verified!' : 'Chain compromised!', valid ? 'success' : 'error');
+        }
+
+        async function createNFT() {
+            const cid = document.getElementById('nftCid').value;
+            const usage = document.getElementById('nftUsage').value;
+            const expiry = document.getElementById('nftExpiry').value;
+            
+            if (!cid) {
+                showNotification('Please enter a CID', 'error');
+                return;
+            }
+
+            const nft = await aiSubstrate.createNFT(cid, usage, expiry);
+            showNotification(`NFT created: ${nft.id.substring(0,16)}...`, 'success');
+            displayNFTs();
+        }
+
+        async function storeToIPFS() {
+            const data = document.getElementById('ipfsData').value;
+            const key = document.getElementById('encryptKey').value;
+            
+            if (!data) {
+                showNotification('Please enter data to store', 'error');
+                return;
+            }
+
+            const cid = await aiSubstrate.storeToIPFS(data, key);
+            const log = document.getElementById('ipfsLog');
+            log.innerHTML += `\n✅ Stored to IPFS: ${cid}\n`;
+            displayStorage();
+        }
+
+        async function retrieveFromIPFS() {
+            const cid = prompt('Enter CID to retrieve:');
+            if (!cid) return;
+            
+            const item = await aiSubstrate.retrieveFromIPFS(cid);
+            const log = document.getElementById('ipfsLog');
+            if (item) {
+                log.innerHTML += `\n✅ Retrieved: ${item.content.substring(0,100)}...\n`;
+            } else {
+                log.innerHTML += `\n❌ CID not found: ${cid}\n`;
+            }
+        }
+
+        function createAgent() {
+            const name = document.getElementById('agentName').value;
+            const model = document.getElementById('agentModel').value;
+            
+            const agent = aiSubstrate.createAgent(name, model);
+            const log = document.getElementById('agentLog');
+            log.innerHTML += `\n✅ Agent created: ${agent.name}\n`;
+            displayAgents();
+        }
+
+        // DEX Functions
+        function useInBrowserWallet() {
+            dex.setWallet(aiSubstrate.walletAddress, 'browser');
+            showNotification('Using in-browser wallet', 'success');
+            updateTokenStatus();
+            renderTab(currentTab);
+        }
+
+        async function connectMetaMask() {
+            if (typeof window.ethereum === 'undefined') {
+                showNotification('MetaMask not installed', 'error');
+                return;
+            }
+
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                dex.setWallet(accounts[0], 'metamask');
+                showNotification('MetaMask connected!', 'success');
+                updateTokenStatus();
+                renderTab(currentTab);
+            } catch (error) {
+                showNotification('Failed to connect MetaMask', 'error');
+            }
+        }
+
+        function updateSwapCalculation() {
+            const amountIn = parseFloat(document.getElementById('amountFrom').value) || 0;
+            const fromToken = document.getElementById('tokenFrom').value;
+            const toToken = document.getElementById('tokenTo').value;
+
+            if (amountIn > 0 && fromToken !== toToken) {
+                const pool = dex.getPool(fromToken, toToken);
+                if (pool) {
+                    const isNormalOrder = pool.tokenA === fromToken;
+                    const reserveIn = isNormalOrder ? pool.reserveA : pool.reserveB;
+                    const reserveOut = isNormalOrder ? pool.reserveB : pool.reserveA;
+                    
+                    const amountOut = dex.calculateSwapOutput(amountIn, reserveIn, reserveOut);
+                    const priceImpact = dex.calculatePriceImpact(amountIn, reserveIn, reserveOut);
+                    
+                    document.getElementById('amountTo').value = amountOut.toFixed(6);
+                    document.getElementById('impactValue').textContent = priceImpact.toFixed(2) + '%';
+                    
+                    const impactEl = document.getElementById('priceImpact');
+                    if (priceImpact > 5) {
+                        impactEl.classList.add('high');
+                    } else {
+                        impactEl.classList.remove('high');
+                    }
+                }
+            }
+        }
+
+        function swapTokenDirection() {
+            const fromSelect = document.getElementById('tokenFrom');
+            const toSelect = document.getElementById('tokenTo');
+            [fromSelect.value, toSelect.value] = [toSelect.value, fromSelect.value];
+            updateSwapCalculation();
+            updateDEXBalances();
+        }
+
+        async function executeSwap() {
+            if (!dex.currentAddress) {
+                showNotification('Please connect wallet first', 'error');
+                return;
+            }
+
+            const fromToken = document.getElementById('tokenFrom').value;
+            const toToken = document.getElementById('tokenTo').value;
+            const amountIn = parseFloat(document.getElementById('amountFrom').value);
+
+            if (!amountIn || amountIn <= 0) {
+                showNotification('Invalid amount', 'error');
+                return;
+            }
+
+            try {
+                const result = dex.executeAMMSwap(fromToken, toToken, amountIn);
+                showNotification(`Swap successful! Received ${result.amountOut.toFixed(4)} ${toToken}`, 'success');
+                
+                document.getElementById('amountFrom').value = '';
+                document.getElementById('amountTo').value = '';
+                updateDEXBalances();
+                updateTokenStatus();
+                updateDEXHistory();
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
+        }
+
+        async function addLiquidity() {
+            if (!dex.currentAddress) {
+                showNotification('Please connect wallet first', 'error');
+                return;
+            }
+
+            const tokenA = document.getElementById('liquidityTokenA').value;
+            const tokenB = document.getElementById('liquidityTokenB').value;
+            const amountA = parseFloat(document.getElementById('liquidityAmountA').value);
+            const amountB = parseFloat(document.getElementById('liquidityAmountB').value);
+
+            if (!amountA || !amountB || amountA <= 0 || amountB <= 0) {
+                showNotification('Invalid amounts', 'error');
+                return;
+            }
+
+            try {
+                dex.addLiquidity(tokenA, tokenB, amountA, amountB);
+                showNotification('Liquidity added successfully!', 'success');
+                
+                document.getElementById('liquidityAmountA').value = '';
+                document.getElementById('liquidityAmountB').value = '';
+                updateDEXBalances();
+                updateDEXHistory();
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
+        }
+
+        // Display Functions
+        function displayBlockchain() {
+            const listEl = document.getElementById('blockList');
+            if (!listEl) return;
+            
+            listEl.innerHTML = aiSubstrate.chain.slice().reverse().slice(0, 5).map(block => `
+                <div class="block-item">
+                    <strong>Block #${block.index}</strong><br>
+                    <small>Hash: ${block.hash.substring(0,32)}...</small><br>
+                    <small>Action: ${block.data.action || 'GENESIS'}</small><br>
+                    <small>Time: ${new Date(block.timestamp).toLocaleTimeString()}</small>
+                </div>
+            `).join('');
+        }
+
+        function displayNFTs() {
+            const listEl = document.getElementById('nftList');
+            if (!listEl) return;
+            
+            listEl.innerHTML = aiSubstrate.nfts.map(nft => `
+                <div class="nft-card">
+                    <strong>NFT #${nft.id.substring(0,8)}...</strong><br>
+                    <small>CID: ${nft.cid}</small><br>
+                    <small>Usage: ${nft.usage}</small><br>
+                    <small>Expires: ${nft.expires}</small>
+                </div>
+            `).join('') || '<p class="info-text">No NFTs created yet</p>';
+        }
+
+        function displayStorage() {
+            const listEl = document.getElementById('ipfsList');
+            if (!listEl) return;
+            
+            listEl.innerHTML = Array.from(aiSubstrate.storage.entries()).map(([cid, item]) => `
+                <div class="block-item">
+                    <strong>${cid.substring(0,30)}...</strong><br>
+                    <small>Encrypted: ${item.encrypted ? 'Yes' : 'No'}</small><br>
+                    <small>Time: ${new Date(item.timestamp).toLocaleTimeString()}</small>
+                </div>
+            `).join('') || '<p class="info-text">No items stored yet</p>';
+        }
+
+        function displayAgents() {
+            const listEl = document.getElementById('agentList');
+            if (!listEl) return;
+            
+            listEl.innerHTML = aiSubstrate.agents.map(agent => `
+                <div class="nft-card">
+                    <strong>${agent.name}</strong><br>
+                    <small>ID: ${agent.id}</small><br>
+                    <small>Model: ${agent.model}</small><br>
+                    <small>Wallet: ${agent.wallet.substring(0,12)}...</small>
+                </div>
+            `).join('') || '<p class="info-text">No agents created yet</p>';
+        }
+
+        function updateDEXBalances() {
+            if (!dex.currentAddress) return;
+
+            const fromToken = document.getElementById('tokenFrom')?.value;
+            const toToken = document.getElementById('tokenTo')?.value;
+            
+            const balFromEl = document.getElementById('balanceFrom');
+            const balToEl = document.getElementById('balanceTo');
+            
+            if (balFromEl && fromToken) {
+                balFromEl.textContent = dex.getBalance(dex.currentAddress, fromToken).toFixed(4);
+            }
+            if (balToEl && toToken) {
+                balToEl.textContent = dex.getBalance(dex.currentAddress, toToken).toFixed(4);
+            }
+        }
+
+        function updateDEXHistory() {
+            const histEl = document.getElementById('dexHistory');
+            if (!histEl) return;
+
+            if (dex.history.length === 0) {
+                histEl.innerHTML = '<p class="info-text">No transactions yet</p>';
+                return;
+            }
+
+            histEl.innerHTML = dex.history.slice(0, 5).map(tx => `
+                <div class="history-item">
+                    <strong>${tx.type}</strong>
+                    <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                        <span>${tx.from} → ${tx.to}</span>
+                        <span class="info-text">${tx.timestamp}</span>
+                    </div>
+                    <div class="info-text">In: ${tx.amountIn} | Out: ${tx.amountOut}</div>
+                </div>
+            `).join('');
+
+            const volEl = document.getElementById('totalVolume');
+            const tradesEl = document.getElementById('totalTrades');
+            if (volEl) volEl.textContent = '$' + dex.stats.volume24h.toFixed(2);
+            if (tradesEl) tradesEl.textContent = dex.stats.totalTrades;
+        }
+
+        function updateTokenStatus() {
+            const tokenEl = document.getElementById('token-status');
+            if (tokenEl && dex.currentAddress) {
+                const balance = dex.getBalance(dex.currentAddress, 'IAM');
+                tokenEl.innerHTML = `IAM Tokens: <span>${balance.toFixed(2)}</span>`;
+            }
+        }
+
+        // Helper Functions
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <h4>${type === 'success' ? '✓ Success' : type === 'error' ? '✗ Error' : 'ℹ Info'}</h4>
+                <p>${message}</p>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            showNotification('Copied to clipboard!', 'success');
+        }
+
+        function initSystem() {
+            useInBrowserWallet();
+            showNotification('System initialized!', 'success');
+        }
+
+        async function runFullDemo() {
+            showNotification('Running full demo...', 'info');
+            
+            // Initialize wallet
+            useInBrowserWallet();
+            
+            // Execute AI
+            await aiSubstrate.addBlock('DEMO', {action: 'Full system demo'});
+            
+            // Create NFT
+            await aiSubstrate.createNFT('ipfs://QmDemo', 'ai-training', '2026-12-31');
+            
+            // Store to IPFS
+            await aiSubstrate.storeToIPFS('Demo data', '');
+            
+            // Create agent
+            aiSubstrate.createAgent('Demo-Agent', 'WebLLM-7B');
+            
+            showNotification('Demo complete! Check all tabs.', 'success');
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        setTimeout(() => {
+            renderTab('home');
+            showNotification('I-AM-SYSTEMS Complete Ready!', 'success');
+        }, 1000);
+    </script>
+</body>
+</html>
