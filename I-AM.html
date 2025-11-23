@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📦 I‑AM‑SYSTEMS – Complete Decentralized Universe</title>
+    <title>🌌 I‑AM‑SYSTEMS PREMIUM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,729 +14,1006 @@
         }
 
         :root {
-            --color-bg: #05080d;
-            --color-surface: #0c141c;
-            --color-primary: #00ffc8;
-            --color-secondary: #7afcff;
-            --color-text: #e6f5ff;
-            --color-muted: #6e8898;
-            --color-border: rgba(0, 255, 200, .3);
-            --glow: 0 0 15px rgba(0, 255, 200, .45);
-            --glow-strong: 0 0 25px rgba(0, 255, 200, .75);
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #151b2e;
+            --bg-card: #1a2235;
+            --accent-primary: #00ffc8;
+            --accent-secondary: #7afcff;
+            --accent-purple: #a78bfa;
+            --accent-pink: #f472b6;
+            --text-primary: #e8f4ff;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: rgba(0, 255, 200, 0.15);
+            --glow: 0 0 20px rgba(0, 255, 200, 0.3);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
         body {
-            font-family: 'Orbitron', 'Segoe UI', Tahoma, sans-serif;
-            background: radial-gradient(circle at center, #0a1016 0%, #020407 100%);
-            color: var(--color-text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f35 100%);
+            color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
 
-        body::before,
-        body::after {
+        body::before {
             content: "";
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 200, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(167, 139, 250, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Animated background particles */
+        .particles {
             position: fixed;
             inset: 0;
             pointer-events: none;
             z-index: 0;
         }
 
-        body::before {
-            background: repeating-linear-gradient(to bottom,
-                    rgba(0, 255, 200, .06) 0,
-                    rgba(0, 255, 200, .06) 1px,
-                    transparent 2px);
-            opacity: .25;
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite linear;
         }
 
-        body::after {
-            background:
-                linear-gradient(90deg, rgba(0, 255, 200, .07) 1px, transparent 1px),
-                linear-gradient(rgba(0, 255, 200, .07) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: .1;
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); }
+            100% { transform: translateY(-100vh) translateX(100px); }
         }
 
         header {
-            background: var(--color-surface);
-            padding: 20px;
-            border-bottom: 2px solid var(--color-primary);
-            box-shadow: var(--glow);
-            position: relative;
-            z-index: 2;
+            background: rgba(26, 34, 53, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         h1 {
-            color: var(--color-primary);
+            color: var(--accent-primary);
             text-align: center;
-            font-size: 2.8rem;
-            text-shadow: var(--glow-strong);
-            letter-spacing: 3px;
-            margin-bottom: .5rem;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 30px rgba(0, 255, 200, 0.5);
         }
 
-        .subtitle,
-        .copyright {
+        .subtitle {
             text-align: center;
-            color: var(--color-secondary);
-            opacity: .85;
-        }
-
-        .copyright {
-            font-size: .9rem;
-            color: #888;
-            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
         #tabs {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: .75rem;
+            gap: 0.5rem;
             margin-top: 1rem;
+            padding: 0 1rem;
         }
 
         .tab {
-            padding: .6rem 1.2rem;
-            background: rgba(0, 0, 0, .4);
-            color: var(--color-secondary);
-            border: 1px solid var(--color-primary);
-            border-radius: .4rem;
+            padding: 0.5rem 1rem;
+            background: rgba(26, 34, 53, 0.6);
+            backdrop-filter: blur(10px);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: all .25s ease-in-out;
-            font-weight: 600;
-            letter-spacing: 1px;
-            backdrop-filter: blur(6px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
         }
 
         .tab:hover {
-            background: var(--color-primary);
-            color: var(--color-bg);
-            transform: translateY(-3px);
-            box-shadow: var(--glow-strong);
+            background: rgba(0, 255, 200, 0.1);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 255, 200, 0.2);
         }
 
         .tab.active {
-            background: var(--color-primary);
-            color: var(--color-bg);
-            box-shadow: var(--glow-strong);
+            background: linear-gradient(135deg, rgba(0, 255, 200, 0.2), rgba(122, 252, 255, 0.15));
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            box-shadow: 0 4px 16px rgba(0, 255, 200, 0.3);
         }
 
         main {
-            padding: 1.5rem;
-            max-width: 1480px;
+            padding: 2rem;
+            max-width: 1600px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
         }
 
         #content-area {
-            background: var(--color-surface);
-            padding: 2rem;
-            border-radius: .6rem;
-            border: 1px solid var(--color-border);
-            box-shadow: inset 0 0 10px rgba(0, 255, 200, .15), var(--glow);
-            min-height: 600px;
+            animation: fadeIn 0.4s ease-out;
         }
 
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: var(--color-secondary);
-            font-size: 1.3rem;
-        }
-
-        .spinner {
-            border: 4px solid var(--color-border);
-            border-top: 4px solid var(--color-primary);
-            border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            animation: spin .9s linear infinite;
-            margin: 1rem auto;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .status-bar {
-            background: rgba(0, 0, 0, .4);
-            padding: .75rem 1.25rem;
+            background: rgba(26, 34, 53, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
             margin-top: 1rem;
-            border-radius: .4rem;
+            border-radius: 0.75rem;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: .9rem;
-            border: 1px solid var(--color-border);
-            backdrop-filter: blur(4px);
+            gap: 1rem;
+            border: 1px solid var(--border);
         }
 
         .status-item {
-            font-size: .85rem;
-            color: var(--color-muted);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .status-item.connected {
-            color: #00ff95;
+            color: var(--accent-primary);
         }
 
-        .status-item.disconnected {
-            color: #ff4d4d;
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            box-shadow: 0 0 10px var(--accent-primary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         button {
-            padding: .6rem 1.2rem;
-            background: var(--color-primary);
-            color: var(--color-bg);
+            padding: 0.625rem 1.25rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: var(--bg-primary);
             border: none;
-            border-radius: .4rem;
+            border-radius: 0.5rem;
             cursor: pointer;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all .25s;
-            margin-right: .5rem;
-            margin-bottom: .5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.3px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 255, 200, 0.2);
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        button:hover {
-            transform: scale(1.08);
-            box-shadow: var(--glow-strong);
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 200, 0.4);
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0);
         }
 
         button:disabled {
-            opacity: .5;
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
+        button.secondary {
+            background: rgba(26, 34, 53, 0.8);
+            border: 1px solid var(--border);
+            color: var(--accent-primary);
+            box-shadow: none;
+        }
+
+        button.secondary:hover:not(:disabled) {
+            background: rgba(0, 255, 200, 0.1);
+            border-color: var(--accent-primary);
+        }
+
         .card {
-            background: var(--color-bg);
+            background: rgba(26, 34, 53, 0.6);
+            backdrop-filter: blur(20px);
             padding: 1.5rem;
-            border-radius: .5rem;
+            border-radius: 1rem;
             margin-bottom: 1.5rem;
-            border: 1px solid var(--color-border);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 255, 200, 0.3);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
         }
 
         .card h3 {
-            color: var(--color-secondary);
+            color: var(--accent-primary);
             margin-bottom: 1rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
         }
 
-        input,
-        textarea,
-        select {
+        input, textarea, select {
             width: 100%;
-            padding: .75rem;
-            background: var(--color-surface);
-            color: var(--color-text);
-            border: 1px solid var(--color-border);
-            border-radius: .4rem;
-            margin-bottom: .75rem;
+            padding: 0.75rem 1rem;
+            background: rgba(10, 14, 26, 0.6);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
             font-family: inherit;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(0, 255, 200, 0.1);
         }
 
         textarea {
             resize: vertical;
             min-height: 100px;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-            margin-top: 1.875rem;
-        }
-
-        .feature-card {
-            background: var(--color-bg);
-            padding: 1.5rem;
-            border-radius: .5rem;
-            border: 1px solid var(--color-border);
-        }
-
-        .feature-card h3 {
-            color: var(--color-primary);
-            margin-bottom: .75rem;
-        }
-
-        .notification {
-            position: fixed;
-            top: 1.25rem;
-            right: 1.25rem;
-            background: var(--color-surface);
-            border: 2px solid var(--color-primary);
-            border-radius: .375rem;
-            padding: 1rem;
-            max-width: 400px;
-            z-index: 9999;
-            animation: slideIn .3s ease-out;
-            box-shadow: var(--glow);
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(350px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .notification.success {
-            border-color: #00ff95;
-        }
-
-        .notification.error {
-            border-color: #ff4d4d;
+            line-height: 1.6;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 1.5rem;
+        }
+
+        /* Premium Video Feed Styles */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .video-card {
+            background: rgba(26, 34, 53, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 12px 40px rgba(0, 255, 200, 0.2);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-thumbnail::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+        }
+
+        .video-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 200, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--bg-primary);
+            box-shadow: 0 8px 24px rgba(0, 255, 200, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .video-play-icon {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 12px 32px rgba(0, 255, 200, 0.6);
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 0.75rem;
+            right: 0.75rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .video-info {
+            padding: 1rem;
+        }
+
+        .video-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .video-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        /* Premium Social Feed Styles */
+        .feed-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .feed-item {
+            background: rgba(26, 34, 53, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .feed-item:hover {
+            border-color: rgba(0, 255, 200, 0.3);
+        }
+
+        .feed-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .feed-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0, 255, 200, 0.3);
+        }
+
+        .feed-user-info {
+            flex: 1;
+        }
+
+        .feed-username {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.125rem;
+        }
+
+        .feed-timestamp {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .feed-content {
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .feed-actions {
+            display: flex;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .feed-action {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(10, 14, 26, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .feed-action:hover {
+            background: rgba(0, 255, 200, 0.1);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .feed-action.active {
+            background: rgba(0, 255, 200, 0.1);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+
+        /* Agent Cards */
+        .agent-card {
+            background: linear-gradient(135deg, rgba(0, 255, 200, 0.05), rgba(122, 252, 255, 0.03));
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(0, 255, 200, 0.2);
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .agent-card:hover {
+            background: linear-gradient(135deg, rgba(0, 255, 200, 0.1), rgba(122, 252, 255, 0.06));
+            border-color: var(--accent-primary);
+            transform: translateX(4px);
+        }
+
+        .agent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .agent-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .agent-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .agent-status.idle {
+            background: rgba(100, 116, 139, 0.2);
+            color: var(--text-muted);
+        }
+
+        .agent-status.working {
+            background: rgba(0, 255, 200, 0.2);
+            color: var(--accent-primary);
+            animation: pulse 2s infinite;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
             margin-top: 1.5rem;
         }
 
-        .log {
-            background: #000;
-            color: #0f0;
-            padding: 1rem;
-            border-radius: .4rem;
-            font-family: monospace;
-            font-size: .9rem;
-            max-height: 200px;
-            overflow-y: auto;
-            margin-top: 1rem;
-        }
-
-        .proof {
-            background: var(--color-surface);
-            padding: 1rem;
-            border-radius: .4rem;
-            font-family: monospace;
-            font-size: .85rem;
-            word-break: break-all;
-        }
-
-        /* DEX Specific Styles */
-        .dex-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .token-input-group {
-            background: var(--color-surface);
-            padding: 1rem;
-            border-radius: .5rem;
-            margin-bottom: 1rem;
-            border: 1px solid var(--color-border);
-        }
-
-        .token-input-row {
-            display: flex;
-            gap: .75rem;
-            align-items: center;
-        }
-
-        .swap-arrow {
+        .stat-card {
+            background: linear-gradient(135deg, rgba(26, 34, 53, 0.8), rgba(26, 34, 53, 0.4));
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
             text-align: center;
-            font-size: 2rem;
-            color: var(--color-primary);
-            cursor: pointer;
-            padding: .5rem;
-            user-select: none;
+            transition: all 0.3s ease;
         }
 
-        .swap-arrow:hover {
-            transform: rotate(180deg);
-            transition: transform .3s;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .stat-box {
-            background: var(--color-surface);
-            padding: 1rem;
-            border-radius: .5rem;
-            text-align: center;
-            border: 1px solid var(--color-border);
+        .stat-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 255, 200, 0.15);
         }
 
         .stat-value {
-            font-size: 1.5rem;
-            color: var(--color-primary);
+            font-size: 2rem;
             font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
         }
 
         .stat-label {
-            font-size: .85rem;
-            color: var(--color-muted);
-            margin-top: .25rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
-        .pool-item, .order-item, .history-item, .block-item, .nft-card {
-            background: var(--color-surface);
-            padding: 1rem;
-            margin-bottom: .75rem;
-            border-radius: .5rem;
-            border-left: 3px solid var(--color-primary);
+        /* Code Editor */
+        .code-editor {
+            background: rgba(10, 14, 26, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            overflow: hidden;
         }
 
-        .info-text {
-            color: var(--color-muted);
-            font-size: .9rem;
-            margin-top: .5rem;
-        }
-
-        .price-impact {
+        .code-editor-header {
+            background: rgba(26, 34, 53, 0.8);
+            padding: 0.75rem 1rem;
             display: flex;
             justify-content: space-between;
-            padding: .75rem;
-            background: var(--color-surface);
-            border-radius: .4rem;
-            margin-top: .75rem;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
         }
 
-        .price-impact.high {
-            border: 1px solid #ff4d4d;
+        .code-editor-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .code-editor textarea {
+            background: rgba(10, 14, 26, 0.9);
+            color: #e8f4ff;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.875rem;
+            border: none;
+            min-height: 300px;
+            line-height: 1.6;
+            tab-size: 2;
+        }
+
+        .code-output {
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--accent-primary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            min-height: 150px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(26, 34, 53, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+            max-width: 380px;
+            z-index: 9999;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--accent-primary);
+        }
+
+        .notification.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+        }
+
+        .notification-icon {
+            font-size: 1.25rem;
+        }
+
+        .notification-text {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .notification-message {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Pipeline Visualization */
+        .pipeline-step {
+            background: linear-gradient(135deg, rgba(26, 34, 53, 0.6), rgba(26, 34, 53, 0.4));
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .pipeline-step::after {
+            content: '↓';
+            position: absolute;
+            bottom: -1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent-primary);
+            font-size: 1.25rem;
+        }
+
+        .pipeline-step:last-child::after {
+            display: none;
+        }
+
+        /* Knowledge Sources */
+        .knowledge-source {
+            background: rgba(26, 34, 53, 0.4);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .knowledge-source:hover {
+            background: rgba(0, 255, 200, 0.05);
+            border-color: var(--accent-primary);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 14, 26, 0.4);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 200, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 200, 0.5);
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            #tabs {
-                flex-direction: column;
-            }
-
-            .tab {
-                width: 100%;
-                text-align: center;
-            }
-
-            #content-area {
-                padding: 1rem;
-            }
-
-            .grid, .dex-grid {
-                grid-template-columns: 1fr;
-            }
+            h1 { font-size: 1.5rem; }
+            main { padding: 1rem; }
+            .grid { grid-template-columns: 1fr; }
+            .video-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 
 <body>
+    <div class="particles" id="particles"></div>
+
     <header>
-        <h1>📦 I‑AM‑SYSTEMS</h1>
-        <div class="subtitle">Complete Decentralized Universe with DEX</div>
-        <div class="copyright">
-            © 2025 James Chapman | SPL v1.0 (Non‑Commercial) | Enhanced with Token Swap
-        </div>
+        <h1>🌌 I‑AM‑SYSTEMS PREMIUM</h1>
+        <div class="subtitle">Next-Generation Decentralized Universe</div>
 
         <div id="tabs">
             <div class="tab active" data-tab="home">🏠 Home</div>
-            <div class="tab" data-tab="dex">🔄 DEX</div>
-            <div class="tab" data-tab="identity">🔑 Identity</div>
-            <div class="tab" data-tab="wallet">💼 Wallet</div>
-            <div class="tab" data-tab="ai">🤖 AI Partner</div>
-            <div class="tab" data-tab="blockchain">⛓️ Blockchain</div>
-            <div class="tab" data-tab="nft">🎨 NFT</div>
-            <div class="tab" data-tab="storage">📦 Storage</div>
             <div class="tab" data-tab="agents">🤖 Agents</div>
-            <div class="tab" data-tab="governance">🗳️ Governance</div>
+            <div class="tab" data-tab="pipelines">⚡ Pipelines</div>
+            <div class="tab" data-tab="ai">🧠 AI Hub</div>
+            <div class="tab" data-tab="social">📱 Social</div>
+            <div class="tab" data-tab="video">🎬 Video</div>
+            <div class="tab" data-tab="code">💻 Code</div>
+            <div class="tab" data-tab="knowledge">📚 Knowledge</div>
+            <div class="tab" data-tab="dex">🔄 DEX</div>
+            <div class="tab" data-tab="blockchain">⛓️ Chain</div>
         </div>
 
         <div class="status-bar">
-            <div class="status-item" id="ipfs-status">IPFS: <span class="disconnected">Checking…</span></div>
-            <div class="status-item" id="ollama-status">Ollama: <span class="disconnected">Checking…</span></div>
-            <div class="status-item" id="wallet-status">Wallet: <span class="disconnected">Disconnected</span></div>
-            <div class="status-item" id="did-status">DID: <span class="disconnected">Not Created</span></div>
-            <div class="status-item" id="token-status">IAM Tokens: <span>0</span></div>
-            <div class="status-item">P2P Peers: <span id="p2p-peers">0</span></div>
+            <div class="status-item connected">
+                <div class="status-indicator"></div>
+                <span id="wallet-status">System Active</span>
+            </div>
+            <div class="status-item">
+                Agents: <span id="agents-count">0</span>
+            </div>
+            <div class="status-item">
+                Posts: <span id="posts-count">0</span>
+            </div>
+            <div class="status-item">
+                Videos: <span id="videos-count">0</span>
+            </div>
+            <div class="status-item">
+                Knowledge: <span id="knowledge-count">0</span>
+            </div>
         </div>
     </header>
 
     <main>
-        <div id="content-area">
-            <div class="loading">
-                <div class="spinner"></div>
-                <div>Initializing I‑AM‑SYSTEMS…</div>
-            </div>
-        </div>
+        <div id="content-area"></div>
     </main>
 
     <script>
         // ============================================
-        // CORE ENGINE - AISubstrate (Original)
+        // SYSTEM ENGINE (Same as Ultimate V2)
         // ============================================
-        class AISubstrate {
+        class UltimateSystem {
             constructor() {
-                this.chain = [];
-                this.nfts = [];
-                this.agents = [];
-                this.storage = new Map();
                 this.walletAddress = this.generateAddress();
-                this.lastExecution = null;
-                this.createGenesisBlock();
+                this.chain = [];
+                this.agents = [];
+                this.pipelines = [];
+                this.posts = [];
+                this.knowledgeBase = [];
+                this.videos = [];
+                this.codeScripts = [];
+                this.balances = new Map();
+                this.pools = new Map();
+                this.nfts = [];
+                this.stats = { trades: 0, volume: 0, fees: 0 };
+                this.FEE_PERCENT = 0.003;
+                this.initializeSystem();
             }
 
             generateAddress() {
-                return '0x' + Array.from({length: 40}, () =>
-                Math.floor(Math.random() * 16).toString(16)).join('');
+                return '0x' + Array.from({length: 40}, () => Math.floor(Math.random() * 16).toString(16)).join('');
             }
 
             async sha256(data) {
                 const str = typeof data === 'string' ? data : JSON.stringify(data);
-                const buffer = await crypto.subtle.digest('SHA-256',
-                    new TextEncoder().encode(str));
-                return Array.from(new Uint8Array(buffer))
-                    .map(b => b.toString(16).padStart(2, '0')).join('');
+                const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+                return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
             }
 
-            async keccak256Sim(data) {
-                const str = typeof data === 'string' ? data : JSON.stringify(data);
-                let hash = 0;
-                for (let i = 0; i < str.length; i++) {
-                    hash = ((hash << 5) - hash + str.charCodeAt(i)) | 0;
-                }
-                return Math.abs(hash).toString(16).padStart(64, '0');
-            }
-
-            async createGenesisBlock() {
-                const genesis = {
+            initializeSystem() {
+                this.chain.push({
                     index: 0,
                     timestamp: Date.now(),
-                    data: {type: 'GENESIS', message: 'AI Substrate Genesis'},
-                    previousHash: '0'.repeat(64),
-                    proof: null,
-                    signature: null
-                };
-                genesis.hash = await this.sha256(genesis);
-                genesis.signature = await this.sign(genesis.hash);
-                this.chain.push(genesis);
-            }
+                    data: {type: 'GENESIS'},
+                    hash: '0'.repeat(64),
+                    previousHash: '0'.repeat(64)
+                });
 
-            async sign(data) {
-                const hash = await this.sha256(data + this.walletAddress);
-                return hash.substring(0, 32);
+                this.balances.set(this.walletAddress, {'IAM': 1000, 'ETH': 5, 'USDC': 10000});
+                this.pools.set('IAM-ETH', {tokenA: 'IAM', tokenB: 'ETH', reserveA: 10000, reserveB: 10, lpSupply: 100});
+
+                this.createAgent('Content Creator', 'Creates engaging social media posts', 'social');
+                this.createAgent('Code Analyzer', 'Analyzes and reviews code', 'code');
+                this.createAgent('Trading Bot', 'Executes trades on DEX', 'trading');
             }
 
             async addBlock(action, data) {
-                const previousBlock = this.chain[this.chain.length - 1];
-                const block = {
-                    index: this.chain.length,
-                    timestamp: Date.now(),
-                    data: {action, ...data},
-                    previousHash: previousBlock.hash,
-                    nonce: 0
-                };
+                const prev = this.chain[this.chain.length - 1];
+                const block = {index: this.chain.length, timestamp: Date.now(), data: {action, ...data}, previousHash: prev.hash};
                 block.hash = await this.sha256(block);
-                const proof = {
-                    inputHash: await this.sha256(block.data),
-                    outputHash: block.hash,
-                    merkleRoot: await this.computeMerkleRoot([previousBlock.hash, block.hash])
-                };
-                block.proof = proof;
-                block.signature = await this.sign(block.hash);
                 this.chain.push(block);
                 return block;
             }
 
-            async computeMerkleRoot(hashes) {
-                if (hashes.length === 0) return '0'.repeat(64);
-                if (hashes.length === 1) return hashes[0];
-                const newLevel = [];
-                for (let i = 0; i < hashes.length; i += 2) {
-                    const left = hashes[i];
-                    const right = hashes[i + 1] || left;
-                    newLevel.push(await this.sha256(left + right));
-                }
-                return this.computeMerkleRoot(newLevel);
-            }
-
-            async verifyChain() {
-                let valid = true;
-                for (let i = 1; i < this.chain.length; i++) {
-                    const block = this.chain[i];
-                    const prev = this.chain[i - 1];
-                    if (block.previousHash !== prev.hash) {
-                        valid = false;
-                        break;
-                    }
-                }
-                return valid;
-            }
-
-            // NFT Methods
-            async createNFT(cid, usage, expiry) {
-                const nft = {
-                    id: await this.keccak256Sim(cid + Date.now()),
-                    cid,
-                    owner: this.walletAddress,
-                    permissions: {
-                        read: [this.walletAddress],
-                        write: [this.walletAddress]
-                    },
-                    usage,
-                    expires: expiry || '2026-12-31',
-                    created: new Date().toISOString()
-                };
-                nft.tokenHash = await this.sha256(nft);
-                this.nfts.push(nft);
-                await this.addBlock('NFT_MINT', {nftId: nft.id, owner: nft.owner, cid: nft.cid});
-                return nft;
-            }
-
-            // IPFS Methods
-            async storeToIPFS(data, key) {
-                let content = data;
-                if (key) content = btoa(data + '::' + key);
-                const cid = 'ipfs://Qm' + (await this.keccak256Sim(content)).substring(0, 44);
-                this.storage.set(cid, {content, encrypted: !!key, timestamp: Date.now()});
-                await this.addBlock('IPFS_STORE', {cid});
-                return cid;
-            }
-
-            async retrieveFromIPFS(cid) {
-                return this.storage.get(cid);
-            }
-
-            // Agent Methods
-            createAgent(name, model) {
+            createAgent(name, description, type) {
                 const agent = {
                     id: 'agent-' + Date.now(),
-                    name: name || 'Agent-' + this.agents.length,
-                    model,
-                    wallet: this.generateAddress(),
-                    created: Date.now(),
-                    executions: 0
+                    name,
+                    description,
+                    type,
+                    status: 'idle',
+                    tasksCompleted: 0,
+                    created: Date.now()
                 };
                 this.agents.push(agent);
                 return agent;
             }
-        }
 
-        // ============================================
-        // DEX ENGINE
-        // ============================================
-        class DEXEngine {
-            constructor() {
-                this.pools = new Map();
-                this.balances = new Map();
-                this.orders = [];
-                this.history = [];
-                this.stats = {
-                    volume24h: 0,
-                    totalLiquidity: 0,
-                    totalTrades: 0,
-                    totalFees: 0
+            async executeAgent(agentId, task) {
+                const agent = this.agents.find(a => a.id === agentId);
+                if (!agent) throw new Error('Agent not found');
+
+                agent.status = 'working';
+                agent.tasksCompleted++;
+
+                await this.addBlock('AGENT_EXECUTE', {agentId: agent.id, task});
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                let result = '';
+                if (agent.type === 'social') {
+                    result = `Generated post: "${task.substring(0, 50)}..." with trending hashtags`;
+                } else if (agent.type === 'code') {
+                    result = `Code analysis complete. Found 0 critical issues.`;
+                } else if (agent.type === 'trading') {
+                    result = `Trade executed: ${task}`;
+                } else {
+                    result = `Task completed: ${task}`;
+                }
+
+                agent.status = 'idle';
+                return result;
+            }
+
+            createPipeline(name, steps) {
+                const pipeline = {
+                    id: 'pipeline-' + Date.now(),
+                    name,
+                    steps,
+                    status: 'ready',
+                    executions: 0,
+                    created: Date.now()
                 };
-                this.currentAddress = null;
-                this.walletType = null;
-                this.FEE_PERCENT = 0.003;
-                this.initializeTestData();
+                this.pipelines.push(pipeline);
+                return pipeline;
             }
 
-            initializeTestData() {
-                this.pools.set('IAM-ETH', {
-                    tokenA: 'IAM',
-                    tokenB: 'ETH',
-                    reserveA: 10000,
-                    reserveB: 10,
-                    lpSupply: 100,
-                    lpHolders: new Map()
-                });
+            async executePipeline(pipelineId, input) {
+                const pipeline = this.pipelines.find(p => p.id === pipelineId);
+                if (!pipeline) throw new Error('Pipeline not found');
 
-                this.pools.set('IAM-USDC', {
-                    tokenA: 'IAM',
-                    tokenB: 'USDC',
-                    reserveA: 10000,
-                    reserveB: 1000,
-                    lpSupply: 100,
-                    lpHolders: new Map()
-                });
-            }
+                pipeline.status = 'running';
+                pipeline.executions++;
 
-            setWallet(address, type) {
-                this.currentAddress = address;
-                this.walletType = type;
-                
-                if (type === 'browser' && !this.balances.has(address)) {
-                    this.balances.set(address, {
-                        'IAM': 1000,
-                        'ETH': 5,
-                        'USDC': 10000,
-                        'CUSTOM': 0
-                    });
+                const results = [];
+                let currentInput = input;
+
+                for (const step of pipeline.steps) {
+                    const agent = this.agents.find(a => a.id === step.agentId);
+                    if (agent) {
+                        const result = await this.executeAgent(step.agentId, currentInput);
+                        results.push({step: step.name, result});
+                        currentInput = result;
+                    }
                 }
+
+                await this.addBlock('PIPELINE_EXECUTE', {pipelineId, input, results: results.length});
+                pipeline.status = 'ready';
+                return results;
             }
 
-            getBalance(address, token) {
-                if (!this.balances.has(address)) return 0;
-                return this.balances.get(address)[token] || 0;
+            createPost(author, content, media = null) {
+                const post = {
+                    id: 'post-' + Date.now(),
+                    author,
+                    content,
+                    media,
+                    likes: 0,
+                    comments: [],
+                    timestamp: Date.now()
+                };
+                this.posts.unshift(post);
+                this.addBlock('POST_CREATE', {postId: post.id, author});
+                return post;
             }
 
-            updateBalance(address, token, amount) {
-                if (!this.balances.has(address)) {
-                    this.balances.set(address, {});
-                }
-                const balances = this.balances.get(address);
-                balances[token] = (balances[token] || 0) + amount;
+            likePost(postId) {
+                const post = this.posts.find(p => p.id === postId);
+                if (post) post.likes++;
             }
 
-            getPoolKey(tokenA, tokenB) {
-                return [tokenA, tokenB].sort().join('-');
+            commentOnPost(postId, author, comment) {
+                const post = this.posts.find(p => p.id === postId);
+                if (post) post.comments.push({author, comment, timestamp: Date.now()});
+            }
+
+            async addKnowledge(source, type, content) {
+                const knowledge = {
+                    id: 'kb-' + Date.now(),
+                    source,
+                    type,
+                    content,
+                    indexed: Date.now(),
+                    tokens: content.split(/\s+/).length
+                };
+                this.knowledgeBase.push(knowledge);
+                await this.addBlock('KNOWLEDGE_ADD', {source, type, tokens: knowledge.tokens});
+                return knowledge;
+            }
+
+            searchKnowledge(query) {
+                return this.knowledgeBase.filter(kb => 
+                    kb.content.toLowerCase().includes(query.toLowerCase())
+                );
+            }
+
+            getBalance(token) {
+                const bal = this.balances.get(this.walletAddress);
+                return bal ? bal[token] || 0 : 0;
+            }
+
+            updateBalance(token, amount) {
+                const bal = this.balances.get(this.walletAddress);
+                if (bal) bal[token] = (bal[token] || 0) + amount;
             }
 
             getPool(tokenA, tokenB) {
-                const key = this.getPoolKey(tokenA, tokenB);
+                const key = [tokenA, tokenB].sort().join('-');
                 return this.pools.get(key);
             }
 
             calculateSwapOutput(amountIn, reserveIn, reserveOut) {
-                if (amountIn <= 0 || reserveIn <= 0 || reserveOut <= 0) return 0;
+                if (amountIn <= 0) return 0;
                 const amountInWithFee = amountIn * (1 - this.FEE_PERCENT);
-                const numerator = amountInWithFee * reserveOut;
-                const denominator = reserveIn + amountInWithFee;
-                return numerator / denominator;
+                return (amountInWithFee * reserveOut) / (reserveIn + amountInWithFee);
             }
 
-            calculatePriceImpact(amountIn, reserveIn, reserveOut) {
-                const spotPrice = reserveOut / reserveIn;
-                const amountOut = this.calculateSwapOutput(amountIn, reserveIn, reserveOut);
-                const effectivePrice = amountOut / amountIn;
-                const priceImpact = ((spotPrice - effectivePrice) / spotPrice) * 100;
-                return Math.abs(priceImpact);
-            }
-
-            executeAMMSwap(fromToken, toToken, amountIn) {
+            async executeSwap(fromToken, toToken, amountIn) {
                 const pool = this.getPool(fromToken, toToken);
-                if (!pool) throw new Error(`No liquidity pool for ${fromToken}-${toToken}`);
+                if (!pool) throw new Error('No pool');
 
-                const isNormalOrder = pool.tokenA === fromToken;
-                const reserveIn = isNormalOrder ? pool.reserveA : pool.reserveB;
-                const reserveOut = isNormalOrder ? pool.reserveB : pool.reserveA;
-
+                const isNormal = pool.tokenA === fromToken;
+                const reserveIn = isNormal ? pool.reserveA : pool.reserveB;
+                const reserveOut = isNormal ? pool.reserveB : pool.reserveA;
                 const amountOut = this.calculateSwapOutput(amountIn, reserveIn, reserveOut);
-                const fee = amountIn * this.FEE_PERCENT;
 
-                if (isNormalOrder) {
+                if (isNormal) {
                     pool.reserveA += amountIn;
                     pool.reserveB -= amountOut;
                 } else {
@@ -742,453 +1021,519 @@
                     pool.reserveA -= amountOut;
                 }
 
-                this.updateBalance(this.currentAddress, fromToken, -amountIn);
-                this.updateBalance(this.currentAddress, toToken, amountOut);
+                this.updateBalance(fromToken, -amountIn);
+                this.updateBalance(toToken, amountOut);
+                this.stats.trades++;
 
-                this.stats.totalTrades++;
-                this.stats.totalFees += fee;
-                this.stats.volume24h += amountIn;
-
-                this.history.unshift({
-                    type: 'AMM Swap',
-                    from: fromToken,
-                    to: toToken,
-                    amountIn: amountIn.toFixed(4),
-                    amountOut: amountOut.toFixed(4),
-                    fee: fee.toFixed(4),
-                    timestamp: new Date().toLocaleString()
-                });
-
-                return { amountOut, fee };
+                await this.addBlock('SWAP', {fromToken, toToken, amountIn, amountOut});
+                return {amountOut};
             }
 
-            addLiquidity(tokenA, tokenB, amountA, amountB) {
-                const poolKey = this.getPoolKey(tokenA, tokenB);
-                let pool = this.pools.get(poolKey);
-
-                if (!pool) {
-                    pool = {
-                        tokenA,
-                        tokenB,
-                        reserveA: amountA,
-                        reserveB: amountB,
-                        lpSupply: Math.sqrt(amountA * amountB),
-                        lpHolders: new Map()
-                    };
-                    this.pools.set(poolKey, pool);
-                } else {
-                    const liquidityA = (amountA * pool.lpSupply) / pool.reserveA;
-                    const liquidityB = (amountB * pool.lpSupply) / pool.reserveB;
-                    const liquidity = Math.min(liquidityA, liquidityB);
-
-                    pool.reserveA += amountA;
-                    pool.reserveB += amountB;
-                    pool.lpSupply += liquidity;
-
-                    const currentLP = pool.lpHolders.get(this.currentAddress) || 0;
-                    pool.lpHolders.set(this.currentAddress, currentLP + liquidity);
-                }
-
-                this.updateBalance(this.currentAddress, tokenA, -amountA);
-                this.updateBalance(this.currentAddress, tokenB, -amountB);
-
-                this.history.unshift({
-                    type: 'Add Liquidity',
-                    from: `${tokenA}/${tokenB}`,
-                    to: 'Pool',
-                    amountIn: `${amountA.toFixed(4)} ${tokenA} + ${amountB.toFixed(4)} ${tokenB}`,
-                    amountOut: 'LP Tokens',
-                    timestamp: new Date().toLocaleString()
-                });
-
-                return pool;
+            async uploadVideo(name, description, duration = '5:23') {
+                const video = {
+                    id: 'vid-' + Date.now(),
+                    name,
+                    description,
+                    duration,
+                    views: Math.floor(Math.random() * 1000),
+                    likes: Math.floor(Math.random() * 100),
+                    created: Date.now()
+                };
+                this.videos.push(video);
+                await this.addBlock('VIDEO_UPLOAD', {videoId: video.id});
+                return video;
             }
 
-            getTokenPrice(token) {
-                if (token === 'IAM') {
-                    const pool = this.getPool('IAM', 'USDC');
-                    return pool ? (pool.reserveB / pool.reserveA).toFixed(4) : '0.10';
+            async saveCode(name, language, code) {
+                const script = {
+                    id: 'script-' + Date.now(),
+                    name,
+                    language,
+                    code,
+                    executions: 0,
+                    created: Date.now()
+                };
+                this.codeScripts.push(script);
+                await this.addBlock('CODE_SAVE', {scriptId: script.id});
+                return script;
+            }
+
+            async executeCode(scriptId) {
+                const script = this.codeScripts.find(s => s.id === scriptId);
+                if (!script) throw new Error('Script not found');
+                script.executions++;
+
+                let output = '';
+                try {
+                    if (script.language === 'javascript') {
+                        const logs = [];
+                        const customConsole = {
+                            log: (...args) => logs.push(args.join(' '))
+                        };
+                        const func = new Function('console', 'system', script.code);
+                        func(customConsole, {
+                            chain: this.chain.length,
+                            balance: this.getBalance('IAM')
+                        });
+                        output = logs.join('\n') || 'Execution completed';
+                    } else {
+                        output = `${script.language} execution simulated`;
+                    }
+                } catch (e) {
+                    output = `ERROR: ${e.message}`;
                 }
-                if (token === 'ETH') {
-                    const pool = this.getPool('ETH', 'USDC');
-                    return pool ? (pool.reserveB / pool.reserveA).toFixed(2) : '3000';
-                }
-                if (token === 'USDC') return '1.00';
-                return '0.00';
+
+                await this.addBlock('CODE_EXECUTE', {scriptId});
+                return {output};
             }
         }
 
-        // ============================================
-        // GLOBAL INSTANCES
-        // ============================================
-        const aiSubstrate = new AISubstrate();
-        const dex = new DEXEngine();
-        let currentTab = 'home';
+        const system = new UltimateSystem();
+
+        // Create animated particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
 
         // ============================================
-        // TAB NAVIGATION
+        // UI CONTROLLER
         // ============================================
         document.getElementById('tabs').addEventListener('click', (e) => {
             if (e.target.classList.contains('tab')) {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 e.target.classList.add('active');
-                currentTab = e.target.dataset.tab;
-                renderTab(currentTab);
+                renderTab(e.target.dataset.tab);
             }
         });
 
         function renderTab(tab) {
             const content = document.getElementById('content-area');
-            content.innerHTML = '';
-
             switch(tab) {
-                case 'home':
-                    renderHome(content);
-                    break;
-                case 'dex':
-                    renderDEX(content);
-                    break;
-                case 'identity':
-                    renderIdentity(content);
-                    break;
-                case 'wallet':
-                    renderWallet(content);
-                    break;
-                case 'ai':
-                    renderAI(content);
-                    break;
-                case 'blockchain':
-                    renderBlockchain(content);
-                    break;
-                case 'nft':
-                    renderNFT(content);
-                    break;
-                case 'storage':
-                    renderStorage(content);
-                    break;
-                case 'agents':
-                    renderAgents(content);
-                    break;
-                case 'governance':
-                    renderGovernance(content);
-                    break;
-                default:
-                    content.innerHTML = '<h2>Coming Soon</h2>';
+                case 'home': renderHome(content); break;
+                case 'agents': renderAgents(content); break;
+                case 'pipelines': renderPipelines(content); break;
+                case 'ai': renderAI(content); break;
+                case 'social': renderSocial(content); break;
+                case 'video': renderVideo(content); break;
+                case 'code': renderCode(content); break;
+                case 'knowledge': renderKnowledge(content); break;
+                case 'dex': renderDEX(content); break;
+                case 'blockchain': renderBlockchain(content); break;
             }
         }
 
-        // ============================================
-        // RENDER FUNCTIONS
-        // ============================================
-
         function renderHome(c) {
             c.innerHTML = `
-                <h2 style="color: var(--color-primary); margin-bottom:24px;">Welcome to I‑AM‑SYSTEMS</h2>
-                <p style="color: var(--color-secondary); font-size:1.2em; text-align:center; margin-bottom:2rem;">
-                    Complete Decentralized Universe with AI, Blockchain, NFTs, Storage, and DEX
-                </p>
-
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>🔄 Decentralized Exchange</h3>
-                        <p>Trade tokens with AMM or P2P, provide liquidity, earn fees</p>
-                        <button onclick="switchToTab('dex')">Go to DEX</button>
+                <h2 style="color: var(--accent-primary); font-size: 2rem; margin-bottom: 2rem; font-weight: 700;">Welcome to I‑AM‑SYSTEMS Premium</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">${system.agents.length}</div>
+                        <div class="stat-label">AI Agents</div>
                     </div>
-                    <div class="feature-card">
-                        <h3>🤖 AI Partner</h3>
-                        <p>Deterministic AI execution with provable results</p>
-                        <button onclick="switchToTab('ai')">Launch AI</button>
+                    <div class="stat-card">
+                        <div class="stat-value">${system.pipelines.length}</div>
+                        <div class="stat-label">Pipelines</div>
                     </div>
-                    <div class="feature-card">
-                        <h3>⛓️ Blockchain</h3>
-                        <p>${aiSubstrate.chain.length} blocks mined</p>
-                        <button onclick="switchToTab('blockchain')">View Chain</button>
+                    <div class="stat-card">
+                        <div class="stat-value">${system.posts.length}</div>
+                        <div class="stat-label">Posts</div>
                     </div>
-                    <div class="feature-card">
-                        <h3>🎨 NFT Licenses</h3>
-                        <p>Create and manage NFT licenses for AI training & data</p>
-                        <button onclick="switchToTab('nft')">Create NFT</button>
+                    <div class="stat-card">
+                        <div class="stat-value">${system.videos.length}</div>
+                        <div class="stat-label">Videos</div>
                     </div>
-                    <div class="feature-card">
-                        <h3>📦 IPFS Storage</h3>
-                        <p>Decentralized storage with encryption</p>
-                        <button onclick="switchToTab('storage')">Store Data</button>
+                    <div class="stat-card">
+                        <div class="stat-value">${system.knowledgeBase.length}</div>
+                        <div class="stat-label">Knowledge</div>
                     </div>
-                    <div class="feature-card">
-                        <h3>🤖 AI Agents</h3>
-                        <p>Create autonomous AI agents</p>
-                        <button onclick="switchToTab('agents')">Manage Agents</button>
+                    <div class="stat-card">
+                        <div class="stat-value">${system.chain.length}</div>
+                        <div class="stat-label">Blocks</div>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 2rem;">
-                    <h3>Quick Actions</h3>
-                    <button onclick="initSystem()">Initialize All Systems</button>
+                    <h3>⚡ Quick Actions</h3>
                     <button onclick="runFullDemo()">Run Full Demo</button>
+                    <button class="secondary" onclick="switchTab('agents')">Manage Agents</button>
+                    <button class="secondary" onclick="switchTab('video')">Browse Videos</button>
+                    <button class="secondary" onclick="switchTab('social')">Social Feed</button>
+                </div>
+            `;
+        }
+
+        function renderAgents(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--accent-primary); font-size: 1.75rem; margin-bottom: 1.5rem; font-weight: 700;">AI Agents</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>Create New Agent</h3>
+                        <input type="text" id="agentName" placeholder="Agent Name">
+                        <textarea id="agentDesc" placeholder="Agent Description" rows="3"></textarea>
+                        <select id="agentType">
+                            <option value="social">Social Media</option>
+                            <option value="code">Code Analysis</option>
+                            <option value="trading">Trading</option>
+                            <option value="content">Content Creation</option>
+                            <option value="research">Research</option>
+                        </select>
+                        <button onclick="createAgent()">Create Agent</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>Active Agents (${system.agents.length})</h3>
+                        <div style="max-height: 500px; overflow-y: auto;">
+                            ${system.agents.map(a => `
+                                <div class="agent-card">
+                                    <div class="agent-header">
+                                        <div class="agent-name">${a.name}</div>
+                                        <div class="agent-status ${a.status}">${a.status}</div>
+                                    </div>
+                                    <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                                        ${a.description}
+                                    </div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">
+                                        Type: ${a.type} • Tasks: ${a.tasksCompleted}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPipelines(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--accent-primary); font-size: 1.75rem; margin-bottom: 1.5rem; font-weight: 700;">Automation Pipelines</h2>
+                
+                <div class="card">
+                    <h3>Active Pipelines (${system.pipelines.length})</h3>
+                    ${system.pipelines.length === 0 ? 
+                        '<p style="color: var(--text-muted); text-align: center; padding: 2rem;">No pipelines yet. Create your first automation!</p>' :
+                        system.pipelines.map(p => `
+                            <div class="agent-card">
+                                <div class="agent-header">
+                                    <div class="agent-name">${p.name}</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">${p.executions} runs</div>
+                                </div>
+                                <div style="margin-top: 0.75rem;">
+                                    ${p.steps.map((s, i) => `
+                                        <div class="pipeline-step">
+                                            Step ${i + 1}: ${s.name}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')
+                    }
+                </div>
+            `;
+        }
+
+        function renderAI(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--accent-primary); font-size: 1.75rem; margin-bottom: 1.5rem; font-weight: 700;">AI Hub</h2>
+                
+                <div class="card">
+                    <h3>Conversational AI</h3>
+                    <div style="background: rgba(10, 14, 26, 0.6); padding: 1.5rem; border-radius: 0.75rem; min-height: 400px; margin-bottom: 1rem; border: 1px solid var(--border);" id="aiChat">
+                        <div style="color: var(--text-muted); text-align: center; padding: 3rem;">
+                            Start a conversation with the AI...
+                        </div>
+                    </div>
+                    <textarea id="aiInput" placeholder="Type your message..." rows="2"></textarea>
+                    <button onclick="sendAIMessage()">Send Message</button>
+                </div>
+            `;
+        }
+
+        function renderSocial(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--accent-primary); font-size: 1.75rem; margin-bottom: 1.5rem; font-weight: 700;">Social Feed</h2>
+                
+                <div class="feed-container">
+                    <div class="card">
+                        <h3>Create Post</h3>
+                        <textarea id="postContent" placeholder="What's on your mind?" rows="3"></textarea>
+                        <button onclick="createPost()">Post</button>
+                        <button class="secondary" onclick="createPostWithAI()">✨ Generate with AI</button>
+                    </div>
+
+                    ${system.posts.length === 0 ? 
+                        '<div class="card"><p style="text-align: center; color: var(--text-muted); padding: 2rem;">No posts yet. Be the first to post!</p></div>' :
+                        system.posts.map(p => `
+                            <div class="feed-item">
+                                <div class="feed-header">
+                                    <div class="feed-avatar">${p.author.substring(2, 4).toUpperCase()}</div>
+                                    <div class="feed-user-info">
+                                        <div class="feed-username">${p.author.substring(0, 12)}...</div>
+                                        <div class="feed-timestamp">${new Date(p.timestamp).toLocaleString()}</div>
+                                    </div>
+                                </div>
+                                <div class="feed-content">${p.content}</div>
+                                <div class="feed-actions">
+                                    <div class="feed-action ${p.likes > 0 ? 'active' : ''}" onclick="likePost('${p.id}')">
+                                        ❤️ ${p.likes}
+                                    </div>
+                                    <div class="feed-action" onclick="commentPost('${p.id}')">
+                                        💬 ${p.comments.length}
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')
+                    }
+                </div>
+            `;
+        }
+
+        function renderVideo(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--accent-primary); font-size: 1.75rem; margin-bottom: 1.5rem; font-weight: 700;">Video Platform</h2>
+                
+                <div class="card" style="margin-bottom: 2rem;">
+                    <h3>Upload Video</h3>
+                    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                        <input type="text" id="videoName" placeholder="Video title">
+                        <textarea id="videoDesc" placeholder="Description" rows="2"></textarea>
+                        <button onclick="uploadVideo()">Upload Video</button>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1.25rem; font-weight: 600;">
+                    ${system.videos.length === 0 ? 'No videos yet' : `Video Library (${system.videos.length})`}
+                </h3>
+                <div class="video-grid">
+                    ${system.videos.length === 0 ?
+                        '<div class="card" style="grid-column: 1/-1;"><p style="text-align: center; color: var(--text-muted); padding: 2rem;">Upload your first video!</p></div>' :
+                        system.videos.map((v, i) => {
+                            const gradients = [
+                                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                                'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                                'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                                'linear-gradient(135deg, #30cfd0 0%, #330867 100%)'
+                            ];
+                            const gradient = gradients[i % gradients.length];
+                            
+                            return `
+                            <div class="video-card" onclick="playVideo('${v.id}')">
+                                <div class="video-thumbnail" style="background: ${gradient};">
+                                    <div class="video-play-icon">▶</div>
+                                    <div class="video-duration">${v.duration}</div>
+                                </div>
+                                <div class="video-info">
+                                    <div class="video-title">${v.name}</div>
+                                    <div class="video-meta">
+                                        <div class="video-meta-item">
+                                            <span>👁️</span>
+                                            <span>${v.views.toLocaleString()}</span>
+                                        </div>
+                                        <div class="video-meta-item">
+                                            <span>❤️</span>
+                                            <span>${v.likes}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `}).join('')
+                    }
+                </div>
+            `;
+        }
+
+        function renderCode(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--accent-primary); font-size: 1.75rem; margin-bottom: 1.5rem; font-weight: 700;">Code Execution</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>Code Editor</h3>
+                        <input type="text" id="scriptName" placeholder="Script name" style="margin-bottom: 0.75rem;">
+                        <select id="scriptLang" style="margin-bottom: 0.75rem;">
+                            <option value="javascript">JavaScript</option>
+                            <option value="python">Python</option>
+                        </select>
+                        <div class="code-editor">
+                            <div class="code-editor-header">
+                                <div class="code-editor-title">
+                                    <span>💻</span>
+                                    <span>Code Editor</span>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button onclick="saveCode()" style="padding: 0.375rem 0.75rem; font-size: 0.8rem;">💾 Save</button>
+                                    <button onclick="executeCode()" style="padding: 0.375rem 0.75rem; font-size: 0.8rem;">▶️ Run</button>
+                                </div>
+                            </div>
+                            <textarea id="codeEditor" placeholder="// Your code here
+console.log('Hello from I-AM-SYSTEMS!');
+console.log('Chain length:', system.chain);
+console.log('Balance:', system.balance);"></textarea>
+                        </div>
+                        <div id="codeOutput" class="code-output" style="display: none;"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Saved Scripts (${system.codeScripts.length})</h3>
+                        <div style="max-height: 500px; overflow-y: auto;">
+                            ${system.codeScripts.length === 0 ?
+                                '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">No scripts saved yet</p>' :
+                                system.codeScripts.map(s => `
+                                    <div class="agent-card" onclick="loadScript('${s.id}')">
+                                        <div class="agent-header">
+                                            <div class="agent-name">💻 ${s.name}</div>
+                                            <div style="font-size: 0.8rem; color: var(--text-muted);">⚡ ${s.executions} runs</div>
+                                        </div>
+                                        <div style="background: rgba(10, 14, 26, 0.6); padding: 0.75rem; border-radius: 0.5rem; margin-top: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #94a3b8;">
+                                            ${s.code.substring(0, 120)}${s.code.length > 120 ? '...' : ''}
+                                        </div>
+                                    </div>
+                                `).join('')
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderKnowledge(c) {
+            c.innerHTML = `
+                <h2 style="color: var(--accent-primary); font-size: 1.75rem; margin-bottom: 1.5rem; font-weight: 700;">Knowledge Base</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>Add Knowledge</h3>
+                        <select id="knowledgeType">
+                            <option value="url">From URL</option>
+                            <option value="text">Text Content</option>
+                            <option value="file">File Upload</option>
+                        </select>
+                        <input type="text" id="knowledgeSource" placeholder="Source name or URL">
+                        <textarea id="knowledgeContent" placeholder="Paste content here..." rows="6"></textarea>
+                        <button onclick="addKnowledge()">Add to Knowledge Base</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>Knowledge Sources (${system.knowledgeBase.length})</h3>
+                        <div style="max-height: 400px; overflow-y: auto;">
+                            ${system.knowledgeBase.length === 0 ?
+                                '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">No knowledge sources yet</p>' :
+                                system.knowledgeBase.map(kb => `
+                                    <div class="knowledge-source">
+                                        <div>
+                                            <strong style="color: var(--text-primary);">${kb.source}</strong>
+                                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                                ${kb.type} • ${kb.tokens} tokens • ${new Date(kb.indexed).toLocaleDateString()}
+                                            </div>
+                                        </div>
+                                        <button class="secondary" style="padding: 0.375rem 0.75rem; margin: 0;">View</button>
+                                    </div>
+                                `).join('')
+                            }
+                        </div>
+                    </div>
                 </div>
             `;
         }
 
         function renderDEX(c) {
             c.innerHTML = `
-                <h2 style="color: var(--color-primary);">🔄 Decentralized Exchange</h2>
-                <div class="dex-grid">
-                    <div class="card">
-                        <h3>💱 Token Swap</h3>
-                        <div class="token-input-group">
-                            <label>From</label>
-                            <div class="token-input-row">
-                                <input type="number" id="amountFrom" placeholder="0.0" min="0" step="0.01">
-                                <select id="tokenFrom">
-                                    <option value="IAM">IAM</option>
-                                    <option value="ETH">ETH</option>
-                                    <option value="USDC">USDC</option>
-                                </select>
-                            </div>
-                            <div class="info-text">Balance: <span id="balanceFrom">0</span></div>
-                        </div>
-
-                        <div class="swap-arrow" onclick="swapTokenDirection()">⇅</div>
-
-                        <div class="token-input-group">
-                            <label>To</label>
-                            <div class="token-input-row">
-                                <input type="number" id="amountTo" placeholder="0.0" readonly>
-                                <select id="tokenTo">
-                                    <option value="ETH">ETH</option>
-                                    <option value="IAM">IAM</option>
-                                    <option value="USDC">USDC</option>
-                                </select>
-                            </div>
-                            <div class="info-text">Balance: <span id="balanceTo">0</span></div>
-                        </div>
-
-                        <div class="price-impact" id="priceImpact">
-                            <span>Price Impact:</span>
-                            <span id="impactValue">--%</span>
-                        </div>
-
-                        <button id="swapButton" onclick="executeSwap()" style="width: 100%; margin-top: 1rem;">
-                            Execute Swap
-                        </button>
-                    </div>
-
-                    <div class="card">
-                        <h3>💧 Liquidity Pools</h3>
-                        <div class="token-input-group">
-                            <label>Token A</label>
-                            <div class="token-input-row">
-                                <input type="number" id="liquidityAmountA" placeholder="0.0">
-                                <select id="liquidityTokenA">
-                                    <option value="IAM">IAM</option>
-                                    <option value="ETH">ETH</option>
-                                    <option value="USDC">USDC</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="token-input-group">
-                            <label>Token B</label>
-                            <div class="token-input-row">
-                                <input type="number" id="liquidityAmountB" placeholder="0.0">
-                                <select id="liquidityTokenB">
-                                    <option value="ETH">ETH</option>
-                                    <option value="IAM">IAM</option>
-                                    <option value="USDC">USDC</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button onclick="addLiquidity()" style="width: 100%;">Add Liquidity</button>
-                    </div>
-
-                    <div class="card">
-                        <h3>📊 DEX Statistics</h3>
-                        <div class="stats-grid">
-                            <div class="stat-box">
-                                <div class="stat-value" id="totalVolume">$0</div>
-                                <div class="stat-label">24h Volume</div>
-                            </div>
-                            <div class="stat-box">
-                                <div class="stat-value" id="totalTrades">${dex.stats.totalTrades}</div>
-                                <div class="stat-label">Total Trades</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>📜 Transaction History</h3>
-                        <div id="dexHistory" style="max-height: 300px; overflow-y: auto;"></div>
-                    </div>
-                </div>
-            `;
-            
-            // Setup event listeners
-            document.getElementById('amountFrom').addEventListener('input', updateSwapCalculation);
-            updateDEXBalances();
-            updateDEXHistory();
-        }
-
-        function renderIdentity(c) {
-            c.innerHTML = `
-                <h2 style="color: var(--color-primary);">🔑 Decentralized Identity</h2>
-                <div class="card">
-                    <h3>Your DID</h3>
-                    <p>Wallet Address: <strong>${aiSubstrate.walletAddress}</strong></p>
-                    <button onclick="copyToClipboard('${aiSubstrate.walletAddress}')">Copy Address</button>
-                </div>
-            `;
-        }
-
-        function renderWallet(c) {
-            c.innerHTML = `
-                <h2 style="color: var(--color-primary);">💼 Wallet</h2>
-                <div class="card">
-                    <h3>Connect Wallet</h3>
-                    <button onclick="connectMetaMask()" style="width: 100%;">Connect MetaMask</button>
-                    <button onclick="useInBrowserWallet()" style="width: 100%; margin-top: .75rem;">Use In-Browser Wallet</button>
-                </div>
+                <h2 style="color: var(--accent-primary); font-size: 1.75rem; margin-bottom: 1.5rem; font-weight: 700;">Decentralized Exchange</h2>
                 
-                ${dex.currentAddress ? `
+                <div class="grid">
                     <div class="card">
-                        <h3>Balances</h3>
+                        <h3>Token Swap</h3>
+                        <label style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem; display: block;">From</label>
+                        <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem;">
+                            <input type="number" id="swapAmount" placeholder="0.0" style="flex: 1; margin: 0;">
+                            <select id="swapFrom" style="width: 120px; margin: 0;">
+                                <option value="IAM">IAM</option>
+                                <option value="ETH">ETH</option>
+                                <option value="USDC">USDC</option>
+                            </select>
+                        </div>
+                        <div style="text-align: center; margin: 1rem 0; font-size: 1.5rem; color: var(--accent-primary);">⇅</div>
+                        <label style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem; display: block;">To</label>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <input type="number" id="swapOutput" placeholder="0.0" readonly style="flex: 1; margin: 0;">
+                            <select id="swapTo" style="width: 120px; margin: 0;">
+                                <option value="ETH">ETH</option>
+                                <option value="IAM">IAM</option>
+                                <option value="USDC">USDC</option>
+                            </select>
+                        </div>
+                        <button onclick="executeSwap()" style="width: 100%; margin-top: 1.5rem;">Execute Swap</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>Your Balances</h3>
                         <div class="stats-grid">
-                            <div class="stat-box">
-                                <div class="stat-value">${dex.getBalance(dex.currentAddress, 'IAM').toFixed(2)}</div>
+                            <div class="stat-card">
+                                <div class="stat-value">${system.getBalance('IAM').toFixed(2)}</div>
                                 <div class="stat-label">IAM</div>
                             </div>
-                            <div class="stat-box">
-                                <div class="stat-value">${dex.getBalance(dex.currentAddress, 'ETH').toFixed(4)}</div>
+                            <div class="stat-card">
+                                <div class="stat-value">${system.getBalance('ETH').toFixed(4)}</div>
                                 <div class="stat-label">ETH</div>
                             </div>
-                            <div class="stat-box">
-                                <div class="stat-value">${dex.getBalance(dex.currentAddress, 'USDC').toFixed(2)}</div>
+                            <div class="stat-card">
+                                <div class="stat-value">${system.getBalance('USDC').toFixed(2)}</div>
                                 <div class="stat-label">USDC</div>
                             </div>
                         </div>
                     </div>
-                ` : ''}
-            `;
-        }
-
-        function renderAI(c) {
-            c.innerHTML = `
-                <h2 style="color: var(--color-primary);">🤖 AI Partner</h2>
-                <div class="card">
-                    <h3>Deterministic AI Execution</h3>
-                    <label>Prompt:</label>
-                    <textarea id="aiPrompt" rows="3" placeholder="Enter AI prompt...">Analyze chain state</textarea>
-                    <label>Seed (for determinism):</label>
-                    <input type="number" id="aiSeed" value="1337">
-                    <button onclick="executeAI()">Execute AI</button>
-                    <div id="aiLog" class="log"></div>
                 </div>
             `;
+
+            document.getElementById('swapAmount').addEventListener('input', updateSwapOutput);
         }
 
         function renderBlockchain(c) {
             c.innerHTML = `
-                <h2 style="color: var(--color-primary);">⛓️ Blockchain</h2>
-                <div class="card">
-                    <h3>Chain Stats</h3>
-                    <p><strong>Blocks:</strong> ${aiSubstrate.chain.length}</p>
-                    <p><strong>Latest Block:</strong> ${aiSubstrate.chain[aiSubstrate.chain.length - 1].hash.substring(0,16)}...</p>
-                    <button onclick="verifyChain()">Verify Chain</button>
-                </div>
+                <h2 style="color: var(--accent-primary); font-size: 1.75rem; margin-bottom: 1.5rem; font-weight: 700;">Blockchain Explorer</h2>
                 
+                <div class="stats-grid" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-value">${system.chain.length}</div>
+                        <div class="stat-label">Total Blocks</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${system.stats.trades}</div>
+                        <div class="stat-label">Transactions</div>
+                    </div>
+                </div>
+
                 <div class="card">
                     <h3>Recent Blocks</h3>
-                    <div id="blockList"></div>
-                </div>
-            `;
-            displayBlockchain();
-        }
-
-        function renderNFT(c) {
-            c.innerHTML = `
-                <h2 style="color: var(--color-primary);">🎨 NFT Licenses</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3>Create License NFT</h3>
-                        <label>Data CID:</label>
-                        <input type="text" id="nftCid" placeholder="ipfs://...">
-                        <label>Usage Type:</label>
-                        <select id="nftUsage">
-                            <option>ai-training</option>
-                            <option>ai-inference</option>
-                            <option>data-access</option>
-                        </select>
-                        <label>Expiration Date:</label>
-                        <input type="date" id="nftExpiry">
-                        <button onclick="createNFT()">Create NFT</button>
-                        <div id="nftLog" class="log"></div>
+                    <div style="max-height: 500px; overflow-y: auto;">
+                        ${system.chain.slice().reverse().slice(0, 10).map(b => `
+                            <div class="agent-card">
+                                <div class="agent-header">
+                                    <div class="agent-name">Block #${b.index}</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">${b.data.action || 'GENESIS'}</div>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; word-break: break-all;">
+                                    Hash: ${b.hash.substring(0, 40)}...
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                    ${new Date(b.timestamp).toLocaleString()}
+                                </div>
+                            </div>
+                        `).join('')}
                     </div>
-
-                    <div class="card">
-                        <h3>My NFT Licenses</h3>
-                        <div id="nftList"></div>
-                    </div>
-                </div>
-            `;
-            displayNFTs();
-        }
-
-        function renderStorage(c) {
-            c.innerHTML = `
-                <h2 style="color: var(--color-primary);">📦 IPFS Storage</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3>Store Data</h3>
-                        <label>Data to store:</label>
-                        <textarea id="ipfsData" rows="4" placeholder="Enter data to store..."></textarea>
-                        <label>Encryption Key (optional):</label>
-                        <input type="text" id="encryptKey" placeholder="Leave empty for unencrypted">
-                        <button onclick="storeToIPFS()">Store to IPFS</button>
-                        <button onclick="retrieveFromIPFS()">Retrieve</button>
-                        <div id="ipfsLog" class="log"></div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Stored Items</h3>
-                        <div id="ipfsList"></div>
-                    </div>
-                </div>
-            `;
-            displayStorage();
-        }
-
-        function renderAgents(c) {
-            c.innerHTML = `
-                <h2 style="color: var(--color-primary);">🤖 AI Agents</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3>Create AI Agent</h3>
-                        <label>Agent Name:</label>
-                        <input type="text" id="agentName" placeholder="Agent-001">
-                        <label>Model:</label>
-                        <select id="agentModel">
-                            <option>WebLLM-7B</option>
-                            <option>Local-Mistral</option>
-                            <option>Deterministic-GPT</option>
-                        </select>
-                        <button onclick="createAgent()">Create Agent</button>
-                        <div id="agentLog" class="log"></div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Active Agents</h3>
-                        <div id="agentList"></div>
-                    </div>
-                </div>
-            `;
-            displayAgents();
-        }
-
-        function renderGovernance(c) {
-            c.innerHTML = `
-                <h2 style="color: var(--color-primary);">🗳️ Governance</h2>
-                <div class="card">
-                    <h3>System Governance</h3>
-                    <p>Vote on protocol parameters using IAM tokens</p>
-                    <p class="info-text">Coming soon: Propose and vote on system changes</p>
                 </div>
             `;
         }
@@ -1197,361 +1542,242 @@
         // ACTION FUNCTIONS
         // ============================================
 
-        function switchToTab(tabName) {
-            const tab = Array.from(document.querySelectorAll('.tab')).find(t => t.dataset.tab === tabName);
-            if (tab) tab.click();
+        function switchTab(tab) {
+            const tabEl = Array.from(document.querySelectorAll('.tab')).find(t => t.dataset.tab === tab);
+            if (tabEl) tabEl.click();
         }
 
-        async function executeAI() {
-            const prompt = document.getElementById('aiPrompt').value;
-            const seed = parseInt(document.getElementById('aiSeed').value);
-            const log = document.getElementById('aiLog');
-            
-            log.innerHTML += `\n[${new Date().toLocaleTimeString()}] Executing AI with seed ${seed}...\n`;
-            log.innerHTML += `Prompt: ${prompt}\n`;
-            log.innerHTML += `✅ AI Response: Analyzed chain with ${aiSubstrate.chain.length} blocks.\n`;
-            
-            await aiSubstrate.addBlock('AI_EXECUTION', {prompt, seed});
-        }
-
-        async function verifyChain() {
-            const valid = await aiSubstrate.verifyChain();
-            showNotification(valid ? 'Chain integrity verified!' : 'Chain compromised!', valid ? 'success' : 'error');
-        }
-
-        async function createNFT() {
-            const cid = document.getElementById('nftCid').value;
-            const usage = document.getElementById('nftUsage').value;
-            const expiry = document.getElementById('nftExpiry').value;
-            
-            if (!cid) {
-                showNotification('Please enter a CID', 'error');
-                return;
-            }
-
-            const nft = await aiSubstrate.createNFT(cid, usage, expiry);
-            showNotification(`NFT created: ${nft.id.substring(0,16)}...`, 'success');
-            displayNFTs();
-        }
-
-        async function storeToIPFS() {
-            const data = document.getElementById('ipfsData').value;
-            const key = document.getElementById('encryptKey').value;
-            
-            if (!data) {
-                showNotification('Please enter data to store', 'error');
-                return;
-            }
-
-            const cid = await aiSubstrate.storeToIPFS(data, key);
-            const log = document.getElementById('ipfsLog');
-            log.innerHTML += `\n✅ Stored to IPFS: ${cid}\n`;
-            displayStorage();
-        }
-
-        async function retrieveFromIPFS() {
-            const cid = prompt('Enter CID to retrieve:');
-            if (!cid) return;
-            
-            const item = await aiSubstrate.retrieveFromIPFS(cid);
-            const log = document.getElementById('ipfsLog');
-            if (item) {
-                log.innerHTML += `\n✅ Retrieved: ${item.content.substring(0,100)}...\n`;
-            } else {
-                log.innerHTML += `\n❌ CID not found: ${cid}\n`;
-            }
-        }
-
-        function createAgent() {
+        async function createAgent() {
             const name = document.getElementById('agentName').value;
-            const model = document.getElementById('agentModel').value;
+            const desc = document.getElementById('agentDesc').value;
+            const type = document.getElementById('agentType').value;
+            if (!name) return showNotification('Agent Creation', 'Please enter agent name', 'error');
+            system.createAgent(name, desc, type);
+            showNotification('Success', 'Agent created successfully!', 'success');
+            renderTab('agents');
+            updateStatus();
+        }
+
+        async function createPost() {
+            const content = document.getElementById('postContent').value;
+            if (!content) return showNotification('Post Creation', 'Please enter content', 'error');
+            system.createPost(system.walletAddress, content);
+            showNotification('Success', 'Post created!', 'success');
+            renderTab('social');
+            updateStatus();
+        }
+
+        async function createPostWithAI() {
+            const agent = system.agents.find(a => a.type === 'social');
+            if (!agent) return showNotification('Error', 'No social agent found', 'error');
+            const result = await system.executeAgent(agent.id, 'Create engaging social media post');
+            document.getElementById('postContent').value = result;
+            showNotification('Success', 'Post generated with AI!', 'success');
+        }
+
+        function likePost(postId) {
+            system.likePost(postId);
+            renderTab('social');
+        }
+
+        function commentPost(postId) {
+            const comment = prompt('Enter your comment:');
+            if (comment) {
+                system.commentOnPost(postId, system.walletAddress, comment);
+                renderTab('social');
+            }
+        }
+
+        async function sendAIMessage() {
+            const input = document.getElementById('aiInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chat = document.getElementById('aiChat');
+            chat.innerHTML += `
+                <div style="margin-bottom: 1.5rem; text-align: right;">
+                    <div style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: var(--bg-primary); padding: 1rem; border-radius: 1rem; display: inline-block; max-width: 80%; text-align: left; box-shadow: 0 4px 12px rgba(0, 255, 200, 0.3);">
+                        ${message}
+                    </div>
+                </div>
+            `;
+
+            input.value = '';
+
+            setTimeout(() => {
+                chat.innerHTML += `
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="background: rgba(26, 34, 53, 0.8); padding: 1rem; border-radius: 1rem; display: inline-block; max-width: 80%; border: 1px solid var(--border);">
+                            Based on "${message}", I can help you with:
+                            <ul style="margin-top: 0.75rem; padding-left: 1.5rem; line-height: 1.8;">
+                                <li>Managing ${system.agents.length} AI agents</li>
+                                <li>Executing automation pipelines</li>
+                                <li>Analyzing blockchain (${system.chain.length} blocks)</li>
+                                <li>Creating content from knowledge base</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                chat.scrollTop = chat.scrollHeight;
+            }, 1000);
+        }
+
+        async function uploadVideo() {
+            const name = document.getElementById('videoName').value;
+            const desc = document.getElementById('videoDesc').value;
+            if (!name) return showNotification('Video Upload', 'Please enter video name', 'error');
+
+            await system.uploadVideo(name, desc);
+            showNotification('Success', 'Video uploaded!', 'success');
+            renderTab('video');
+            updateStatus();
+        }
+
+        function playVideo(videoId) {
+            const video = system.videos.find(v => v.id === videoId);
+            if (video) {
+                video.views++;
+                showNotification('Playing', `Now playing: ${video.name}`, 'success');
+                updateStatus();
+            }
+        }
+
+        async function saveCode() {
+            const name = document.getElementById('scriptName').value;
+            const lang = document.getElementById('scriptLang').value;
+            const code = document.getElementById('codeEditor').value;
+            if (!name || !code) return showNotification('Save Code', 'Please enter name and code', 'error');
+
+            await system.saveCode(name, lang, code);
+            showNotification('Success', 'Code saved!', 'success');
+            renderTab('code');
+        }
+
+        async function executeCode() {
+            const code = document.getElementById('codeEditor').value;
+            const lang = document.getElementById('scriptLang').value;
+            if (!code) return showNotification('Execute Code', 'Please enter code', 'error');
+
+            const temp = await system.saveCode('temp-' + Date.now(), lang, code);
+            const result = await system.executeCode(temp.id);
             
-            const agent = aiSubstrate.createAgent(name, model);
-            const log = document.getElementById('agentLog');
-            log.innerHTML += `\n✅ Agent created: ${agent.name}\n`;
-            displayAgents();
+            const outputEl = document.getElementById('codeOutput');
+            outputEl.style.display = 'block';
+            outputEl.textContent = result.output;
+            showNotification('Success', 'Code executed!', 'success');
         }
 
-        // DEX Functions
-        function useInBrowserWallet() {
-            dex.setWallet(aiSubstrate.walletAddress, 'browser');
-            showNotification('Using in-browser wallet', 'success');
-            updateTokenStatus();
-            renderTab(currentTab);
-        }
-
-        async function connectMetaMask() {
-            if (typeof window.ethereum === 'undefined') {
-                showNotification('MetaMask not installed', 'error');
-                return;
-            }
-
-            try {
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                dex.setWallet(accounts[0], 'metamask');
-                showNotification('MetaMask connected!', 'success');
-                updateTokenStatus();
-                renderTab(currentTab);
-            } catch (error) {
-                showNotification('Failed to connect MetaMask', 'error');
+        function loadScript(scriptId) {
+            const script = system.codeScripts.find(s => s.id === scriptId);
+            if (script) {
+                document.getElementById('scriptName').value = script.name;
+                document.getElementById('scriptLang').value = script.language;
+                document.getElementById('codeEditor').value = script.code;
+                showNotification('Loaded', `Loaded: ${script.name}`, 'success');
             }
         }
 
-        function updateSwapCalculation() {
-            const amountIn = parseFloat(document.getElementById('amountFrom').value) || 0;
-            const fromToken = document.getElementById('tokenFrom').value;
-            const toToken = document.getElementById('tokenTo').value;
+        async function addKnowledge() {
+            const type = document.getElementById('knowledgeType').value;
+            const source = document.getElementById('knowledgeSource').value;
+            const content = document.getElementById('knowledgeContent').value;
 
-            if (amountIn > 0 && fromToken !== toToken) {
-                const pool = dex.getPool(fromToken, toToken);
+            if (!source) return showNotification('Add Knowledge', 'Please enter source', 'error');
+            if (!content && type === 'text') return showNotification('Add Knowledge', 'Please enter content', 'error');
+
+            await system.addKnowledge(source, type, content || `Content from ${source}`);
+            showNotification('Success', 'Knowledge added!', 'success');
+            renderTab('knowledge');
+            updateStatus();
+        }
+
+        function updateSwapOutput() {
+            const amount = parseFloat(document.getElementById('swapAmount').value) || 0;
+            const from = document.getElementById('swapFrom').value;
+            const to = document.getElementById('swapTo').value;
+
+            if (amount > 0 && from !== to) {
+                const pool = system.getPool(from, to);
                 if (pool) {
-                    const isNormalOrder = pool.tokenA === fromToken;
-                    const reserveIn = isNormalOrder ? pool.reserveA : pool.reserveB;
-                    const reserveOut = isNormalOrder ? pool.reserveB : pool.reserveA;
-                    
-                    const amountOut = dex.calculateSwapOutput(amountIn, reserveIn, reserveOut);
-                    const priceImpact = dex.calculatePriceImpact(amountIn, reserveIn, reserveOut);
-                    
-                    document.getElementById('amountTo').value = amountOut.toFixed(6);
-                    document.getElementById('impactValue').textContent = priceImpact.toFixed(2) + '%';
-                    
-                    const impactEl = document.getElementById('priceImpact');
-                    if (priceImpact > 5) {
-                        impactEl.classList.add('high');
-                    } else {
-                        impactEl.classList.remove('high');
-                    }
+                    const isNormal = pool.tokenA === from;
+                    const reserveIn = isNormal ? pool.reserveA : pool.reserveB;
+                    const reserveOut = isNormal ? pool.reserveB : pool.reserveA;
+                    const output = system.calculateSwapOutput(amount, reserveIn, reserveOut);
+                    document.getElementById('swapOutput').value = output.toFixed(6);
                 }
             }
         }
 
-        function swapTokenDirection() {
-            const fromSelect = document.getElementById('tokenFrom');
-            const toSelect = document.getElementById('tokenTo');
-            [fromSelect.value, toSelect.value] = [toSelect.value, fromSelect.value];
-            updateSwapCalculation();
-            updateDEXBalances();
-        }
-
         async function executeSwap() {
-            if (!dex.currentAddress) {
-                showNotification('Please connect wallet first', 'error');
-                return;
-            }
+            const from = document.getElementById('swapFrom').value;
+            const to = document.getElementById('swapTo').value;
+            const amount = parseFloat(document.getElementById('swapAmount').value);
 
-            const fromToken = document.getElementById('tokenFrom').value;
-            const toToken = document.getElementById('tokenTo').value;
-            const amountIn = parseFloat(document.getElementById('amountFrom').value);
-
-            if (!amountIn || amountIn <= 0) {
-                showNotification('Invalid amount', 'error');
-                return;
-            }
+            if (!amount || amount <= 0) return showNotification('Swap', 'Invalid amount', 'error');
 
             try {
-                const result = dex.executeAMMSwap(fromToken, toToken, amountIn);
-                showNotification(`Swap successful! Received ${result.amountOut.toFixed(4)} ${toToken}`, 'success');
-                
-                document.getElementById('amountFrom').value = '';
-                document.getElementById('amountTo').value = '';
-                updateDEXBalances();
-                updateTokenStatus();
-                updateDEXHistory();
-            } catch (error) {
-                showNotification(error.message, 'error');
+                const result = await system.executeSwap(from, to, amount);
+                showNotification('Success', `Swapped ${amount} ${from} for ${result.amountOut.toFixed(4)} ${to}!`, 'success');
+                document.getElementById('swapAmount').value = '';
+                document.getElementById('swapOutput').value = '';
+                renderTab('dex');
+            } catch (e) {
+                showNotification('Error', e.message, 'error');
             }
-        }
-
-        async function addLiquidity() {
-            if (!dex.currentAddress) {
-                showNotification('Please connect wallet first', 'error');
-                return;
-            }
-
-            const tokenA = document.getElementById('liquidityTokenA').value;
-            const tokenB = document.getElementById('liquidityTokenB').value;
-            const amountA = parseFloat(document.getElementById('liquidityAmountA').value);
-            const amountB = parseFloat(document.getElementById('liquidityAmountB').value);
-
-            if (!amountA || !amountB || amountA <= 0 || amountB <= 0) {
-                showNotification('Invalid amounts', 'error');
-                return;
-            }
-
-            try {
-                dex.addLiquidity(tokenA, tokenB, amountA, amountB);
-                showNotification('Liquidity added successfully!', 'success');
-                
-                document.getElementById('liquidityAmountA').value = '';
-                document.getElementById('liquidityAmountB').value = '';
-                updateDEXBalances();
-                updateDEXHistory();
-            } catch (error) {
-                showNotification(error.message, 'error');
-            }
-        }
-
-        // Display Functions
-        function displayBlockchain() {
-            const listEl = document.getElementById('blockList');
-            if (!listEl) return;
-            
-            listEl.innerHTML = aiSubstrate.chain.slice().reverse().slice(0, 5).map(block => `
-                <div class="block-item">
-                    <strong>Block #${block.index}</strong><br>
-                    <small>Hash: ${block.hash.substring(0,32)}...</small><br>
-                    <small>Action: ${block.data.action || 'GENESIS'}</small><br>
-                    <small>Time: ${new Date(block.timestamp).toLocaleTimeString()}</small>
-                </div>
-            `).join('');
-        }
-
-        function displayNFTs() {
-            const listEl = document.getElementById('nftList');
-            if (!listEl) return;
-            
-            listEl.innerHTML = aiSubstrate.nfts.map(nft => `
-                <div class="nft-card">
-                    <strong>NFT #${nft.id.substring(0,8)}...</strong><br>
-                    <small>CID: ${nft.cid}</small><br>
-                    <small>Usage: ${nft.usage}</small><br>
-                    <small>Expires: ${nft.expires}</small>
-                </div>
-            `).join('') || '<p class="info-text">No NFTs created yet</p>';
-        }
-
-        function displayStorage() {
-            const listEl = document.getElementById('ipfsList');
-            if (!listEl) return;
-            
-            listEl.innerHTML = Array.from(aiSubstrate.storage.entries()).map(([cid, item]) => `
-                <div class="block-item">
-                    <strong>${cid.substring(0,30)}...</strong><br>
-                    <small>Encrypted: ${item.encrypted ? 'Yes' : 'No'}</small><br>
-                    <small>Time: ${new Date(item.timestamp).toLocaleTimeString()}</small>
-                </div>
-            `).join('') || '<p class="info-text">No items stored yet</p>';
-        }
-
-        function displayAgents() {
-            const listEl = document.getElementById('agentList');
-            if (!listEl) return;
-            
-            listEl.innerHTML = aiSubstrate.agents.map(agent => `
-                <div class="nft-card">
-                    <strong>${agent.name}</strong><br>
-                    <small>ID: ${agent.id}</small><br>
-                    <small>Model: ${agent.model}</small><br>
-                    <small>Wallet: ${agent.wallet.substring(0,12)}...</small>
-                </div>
-            `).join('') || '<p class="info-text">No agents created yet</p>';
-        }
-
-        function updateDEXBalances() {
-            if (!dex.currentAddress) return;
-
-            const fromToken = document.getElementById('tokenFrom')?.value;
-            const toToken = document.getElementById('tokenTo')?.value;
-            
-            const balFromEl = document.getElementById('balanceFrom');
-            const balToEl = document.getElementById('balanceTo');
-            
-            if (balFromEl && fromToken) {
-                balFromEl.textContent = dex.getBalance(dex.currentAddress, fromToken).toFixed(4);
-            }
-            if (balToEl && toToken) {
-                balToEl.textContent = dex.getBalance(dex.currentAddress, toToken).toFixed(4);
-            }
-        }
-
-        function updateDEXHistory() {
-            const histEl = document.getElementById('dexHistory');
-            if (!histEl) return;
-
-            if (dex.history.length === 0) {
-                histEl.innerHTML = '<p class="info-text">No transactions yet</p>';
-                return;
-            }
-
-            histEl.innerHTML = dex.history.slice(0, 5).map(tx => `
-                <div class="history-item">
-                    <strong>${tx.type}</strong>
-                    <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
-                        <span>${tx.from} → ${tx.to}</span>
-                        <span class="info-text">${tx.timestamp}</span>
-                    </div>
-                    <div class="info-text">In: ${tx.amountIn} | Out: ${tx.amountOut}</div>
-                </div>
-            `).join('');
-
-            const volEl = document.getElementById('totalVolume');
-            const tradesEl = document.getElementById('totalTrades');
-            if (volEl) volEl.textContent = '$' + dex.stats.volume24h.toFixed(2);
-            if (tradesEl) tradesEl.textContent = dex.stats.totalTrades;
-        }
-
-        function updateTokenStatus() {
-            const tokenEl = document.getElementById('token-status');
-            if (tokenEl && dex.currentAddress) {
-                const balance = dex.getBalance(dex.currentAddress, 'IAM');
-                tokenEl.innerHTML = `IAM Tokens: <span>${balance.toFixed(2)}</span>`;
-            }
-        }
-
-        // Helper Functions
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <h4>${type === 'success' ? '✓ Success' : type === 'error' ? '✗ Error' : 'ℹ Info'}</h4>
-                <p>${message}</p>
-            `;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-            showNotification('Copied to clipboard!', 'success');
-        }
-
-        function initSystem() {
-            useInBrowserWallet();
-            showNotification('System initialized!', 'success');
         }
 
         async function runFullDemo() {
-            showNotification('Running full demo...', 'info');
+            showNotification('Demo', 'Running full system demo...', 'success');
             
-            // Initialize wallet
-            useInBrowserWallet();
+            system.createAgent('Demo Agent', 'Demonstration agent', 'custom');
+            const agent = system.agents[0];
+            system.createPipeline('Demo Pipeline', [
+                {name: 'Step 1', agentId: agent.id},
+                {name: 'Step 2', agentId: agent.id}
+            ]);
+            system.createPost(system.walletAddress, 'Hello from I-AM-SYSTEMS Premium! 🌌 This is a demo post showcasing the social feed.');
+            await system.addKnowledge('Demo Source', 'text', 'This is demonstration knowledge content for the AI knowledge base.');
+            await system.uploadVideo('Demo Video', 'A demonstration video showcasing the platform', '10:45');
+            await system.executeSwap('IAM', 'ETH', 10);
             
-            // Execute AI
-            await aiSubstrate.addBlock('DEMO', {action: 'Full system demo'});
-            
-            // Create NFT
-            await aiSubstrate.createNFT('ipfs://QmDemo', 'ai-training', '2026-12-31');
-            
-            // Store to IPFS
-            await aiSubstrate.storeToIPFS('Demo data', '');
-            
-            // Create agent
-            aiSubstrate.createAgent('Demo-Agent', 'WebLLM-7B');
-            
-            showNotification('Demo complete! Check all tabs.', 'success');
+            setTimeout(() => {
+                showNotification('Complete', 'Demo complete! Explore all tabs.', 'success');
+                updateStatus();
+            }, 1000);
         }
 
-        // ============================================
-        // INITIALIZATION
-        // ============================================
+        function showNotification(title, message, type = 'success') {
+            const n = document.createElement('div');
+            n.className = `notification ${type}`;
+            n.innerHTML = `
+                <div class="notification-content">
+                    <div class="notification-icon">${type === 'success' ? '✓' : '✗'}</div>
+                    <div class="notification-text">
+                        <div class="notification-title">${title}</div>
+                        <div class="notification-message">${message}</div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(n);
+            setTimeout(() => {
+                n.style.opacity = '0';
+                setTimeout(() => n.remove(), 300);
+            }, 3000);
+        }
+
+        function updateStatus() {
+            document.getElementById('agents-count').textContent = system.agents.length;
+            document.getElementById('posts-count').textContent = system.posts.length;
+            document.getElementById('videos-count').textContent = system.videos.length;
+            document.getElementById('knowledge-count').textContent = system.knowledgeBase.length;
+        }
+
+        // Initialize
         setTimeout(() => {
             renderTab('home');
-            showNotification('I-AM-SYSTEMS Complete Ready!', 'success');
-        }, 1000);
+            updateStatus();
+            showNotification('Welcome', '🌌 I-AM-SYSTEMS Premium Ready!', 'success');
+        }, 500);
     </script>
 </body>
 </html>
